@@ -5,12 +5,12 @@ package edu.hm.model;
  */
 public class Medium {
 
-    String location;
-    boolean isBorrowed;
-    User borrowedBy;
-    String titel;
-    String description;
-    User owner;
+    private String location;
+    private boolean isBorrowed;
+    private User borrowedBy;
+    private String titel;
+    private String description;
+    private User owner;
 
     public  Medium(){
 
