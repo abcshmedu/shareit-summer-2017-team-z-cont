@@ -33,7 +33,7 @@ public class MediumData implements MediumDataAccess {
        ArrayList results = new ArrayList<Medium> ();
         if(mediaList.size()>0){
             for (Medium m: mediaList) {
-                if(m.getOwner()== owner){
+                if(m.getOwner()!=null&&m.getOwner() == owner){
                     results.add(m);
                 }
             }
@@ -46,7 +46,7 @@ public class MediumData implements MediumDataAccess {
         ArrayList results = new ArrayList<Medium> ();
         if(mediaList.size()>0){
             for (Medium m: mediaList) {
-                if(m.getTitel().contains(titel)){
+                if(m.getTitel()!=null&&m.getTitel().contains(titel)){
                     results.add(m);
                 }
             }
@@ -59,7 +59,7 @@ public class MediumData implements MediumDataAccess {
         ArrayList results = new ArrayList<Medium> ();
         if(mediaList.size()>0){
             for (Medium m: mediaList) {
-                if(m.getDescription().contains(desc)){
+                if(m.getDescription()!=null&&m.getDescription().contains(desc)){
                     results.add(m);
                 }
             }
@@ -72,7 +72,7 @@ public class MediumData implements MediumDataAccess {
         ArrayList results = new ArrayList<Medium> ();
         if(mediaList.size()>0){
             for (Medium m: mediaList) {
-                if(m.getLocation().contains(loc)){
+                if(m.getLocation()!=null&&m.getLocation().contains(loc)){
                     results.add(m);
                 }
             }
@@ -85,7 +85,7 @@ public class MediumData implements MediumDataAccess {
         ArrayList results = new ArrayList<Medium> ();
         if(mediaList.size()>0){
             for (Medium m: mediaList) {
-                if(m.getBorrowedBy()==borrower){
+                if(m.getBorrowedBy()!=null&&m.getBorrowedBy()==borrower){
                     results.add(m);
                 }
             }
