@@ -16,9 +16,18 @@ public class MediumData implements MediumDataAccess {
     private ArrayList<Medium> mediaList;
 
 
+    public MediumData(){
+        mediaList = new ArrayList<>();
+    }
+
+    public MediumData(ArrayList<Medium> mediaCatalogue){
+        mediaList=mediaCatalogue;
+    }
+
     public void addMedium(User owner, String titel, String description, String Location) {
         mediaList.add(new Medium(owner, titel, description, Location));
     }
+
 
     public ArrayList<Medium> findMediumByOwner(User owner){
        ArrayList results = new ArrayList<Medium> ();
