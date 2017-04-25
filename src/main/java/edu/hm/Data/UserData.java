@@ -21,10 +21,14 @@ public class UserData implements UserDataAccess{
         userList=oldUsers;
     }
 
-    public void addUser(String username, String password){
-        userList.add(new User(username, password));
+    @Override
+    public User addUser(String username, String password){
+        User newUser = new User(username, password);
+        userList.add(newUser);
+        return newUser;
     }
 
+    @Override
     public User findUserByUsername (String username){
         User result = null;
         if(userList.size()>0){
@@ -37,5 +41,11 @@ public class UserData implements UserDataAccess{
 
         return result;
     }
+
+    @Override
+    public ArrayList<User> getAllUsers() {
+        return userList;
+    }
+
 
 }
