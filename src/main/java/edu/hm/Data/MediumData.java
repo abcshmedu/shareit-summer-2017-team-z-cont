@@ -11,12 +11,13 @@ import java.util.ArrayList;
  */
 public class MediumData implements MediumDataAccess {
 
-
-    private ArrayList<Medium> mediaList;
+    // we need the same list over all instances.
+    private ArrayList<Medium> mediaList = new ArrayList<>();
 
 
     public MediumData(){
-        mediaList = new ArrayList<>();
+        // we need the same list over all instances.
+        //mediaList = new ArrayList<>();
     }
 
     public MediumData(ArrayList<Medium> mediaCatalogue){
@@ -93,4 +94,15 @@ public class MediumData implements MediumDataAccess {
         return results;
     }
 
+    public ArrayList<Medium> getMediaList() {
+        return mediaList;
+    }
+
+    @Override
+    public String toString() {
+        // please also add a toString on a Medium
+        return
+                "mediaList=" + mediaList +
+                '}';
+    }
 }

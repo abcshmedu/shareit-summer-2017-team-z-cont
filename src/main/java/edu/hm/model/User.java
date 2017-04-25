@@ -59,4 +59,13 @@ public class User {
     public boolean isActivated() {
         return isActivated;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", forename='" + forename + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }

@@ -76,4 +76,16 @@ public class Medium {
     public User getBorrowedBy(){
         return borrowedBy;
     }
+
+    @Override
+    public String toString() {
+        return "Medium{" +
+                "location='" + location + '\'' +
+                ", Borrowed=" + isBorrowed +
+                ", borrowedBy=" + borrowedBy +
+                ", titel='" + titel + '\'' +
+                ", description='" + description + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }

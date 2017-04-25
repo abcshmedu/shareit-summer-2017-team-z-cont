@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class UserData implements UserDataAccess{
 
 
-    private ArrayList<User> userList;
+    private ArrayList<User> userList = new ArrayList<>();
 
     public UserData () {
-        userList = new ArrayList<>();
+        //userList = new ArrayList<>();
     }
 
     public UserData(ArrayList<User> oldUsers){
