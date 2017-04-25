@@ -3,7 +3,6 @@ package edu.hm.Data;
 import edu.hm.Logic.MediumDataAccess;
 import edu.hm.model.Medium;
 import edu.hm.model.User;
-import org.w3c.dom.stylesheets.MediaList;
 
 import java.util.ArrayList;
 
