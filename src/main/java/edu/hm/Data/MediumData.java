@@ -1,6 +1,8 @@
 package edu.hm.Data;
 
 import edu.hm.Logic.MediumDataAccess;
+import edu.hm.model.Book;
+import edu.hm.model.Disc;
 import edu.hm.model.Medium;
 import edu.hm.model.User;
 
@@ -24,8 +26,8 @@ public class MediumData implements MediumDataAccess {
         mediaList=mediaCatalogue;
     }
 
-    public void addMedium(User owner, String titel, String description, String Location) {
-        mediaList.add(new Medium(owner, titel, description, Location));
+    public void addMedium(Medium m) {
+        mediaList.add(m);
     }
 
 
@@ -97,6 +99,37 @@ public class MediumData implements MediumDataAccess {
     public ArrayList<Medium> getMediaList() {
         return mediaList;
     }
+
+
+    public ArrayList<Medium> findMediumByISBN(String isbn){
+        ArrayList results = new ArrayList<Medium> ();
+        if(mediaList.size() > 0){
+            for(Medium m: mediaList){
+                if (m instanceof Book){
+                    if (((Book) m).getISBN().equals(isbn))
+                        results.add(m);
+                }
+            }
+        }
+        return results;
+    }
+
+
+    public ArrayList<Medium> findMediumByBarcode(String barcode){
+        ArrayList results = new ArrayList<Medium> ();
+        if(mediaList.size() > 0){
+            for(Medium m: mediaList){
+                if (m instanceof Disc){
+                    if (((Book) m).getISBN().equals(barcode))
+                        results.add(m);
+                }
+            }
+        }
+        return results;
+    }
+
+
+
 
     @Override
     public String toString() {

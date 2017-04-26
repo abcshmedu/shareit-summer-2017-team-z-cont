@@ -10,11 +10,13 @@ import java.util.ArrayList;
  */
 public interface MediumDataAccess {
 
-    void addMedium(User owner, String titel, String description, String Location);
+    void addMedium(Medium m);
     ArrayList<Medium> findMediumByOwner(User owner);
     ArrayList<Medium> findMediumByTitel(String titel);
     ArrayList<Medium> findMediumByDescribtion(String desc);
     ArrayList<Medium> findMediumByLocation(String loc);
     ArrayList<Medium> findMediumByBorrower(User borrower);
+    ArrayList<Medium> findMediumByISBN(String isbn);
+    ArrayList<Medium> findMediumByBarcode(String barcode);
 
 }
