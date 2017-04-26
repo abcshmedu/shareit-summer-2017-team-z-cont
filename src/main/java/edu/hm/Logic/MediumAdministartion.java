@@ -184,14 +184,33 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
 
-    private boolean checkValidISBN(String isbn){return true;}
+    private boolean checkValidISBN(String isbn){
+        boolean isValid = false;
+
+        if(isbn.length()==13){
+            int checkSum = 0;
+            for(int i = 0; i <13; i++){
+                if(i%2 == 0){
+                    checkSum += 3*((int) isbn.charAt(i));
+                }
+                else{
+                    checkSum += (int) isbn.charAt(i);
+                }
+            }
+            if(checkSum%10 == 0){
+                isValid = true;
+            }
+        }
+
+        return isValid;
+    }
     private boolean checkValidBarcode(int barcode){return true;}
+
 
     /**
      * check if the user is ok.
      * @return
      */
     private boolean checkUserOK(User user){return user.isActivated();}
-
 
 }
