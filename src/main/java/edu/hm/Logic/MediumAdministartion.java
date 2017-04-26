@@ -1,5 +1,6 @@
 package edu.hm.Logic;
 
+import edu.hm.REST.MediaAdminAccess;
 import edu.hm.model.*;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Maximilian on 21.04.2017.
  */
-public class MediumAdministartion {
+public class MediumAdministartion implements MediaAdminAccess {
 
     MediumDataAccess mdata;
 
@@ -183,14 +184,14 @@ public class MediumAdministartion {
     }
 
 
-    public boolean checkValidISBN(String isbn){return true;}
-    public boolean checkValidBarcode(int barcode){return true;}
+    private boolean checkValidISBN(String isbn){return true;}
+    private boolean checkValidBarcode(int barcode){return true;}
 
     /**
      * check if the user is ok.
      * @return
      */
-    public boolean checkUserOK(User user){return true;}
+    private boolean checkUserOK(User user){return user.isActivated();}
 
 
 }
