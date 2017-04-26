@@ -31,102 +31,12 @@ public class MediumData implements MediumDataAccess {
     }
 
 
-    public ArrayList<Medium> findMediumByOwner(User owner){
-       ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size()>0){
-            for (Medium m: mediaList) {
-                if(m.getOwner()!=null&&m.getOwner() == owner){
-                    results.add(m);
-                }
-            }
-        }
-
-        return results;
-    }
-
-    public ArrayList<Medium> findMediumByTitel(String titel){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size()>0){
-            for (Medium m: mediaList) {
-                if(m.getTitel()!=null&&m.getTitel().contains(titel)){
-                    results.add(m);
-                }
-            }
-        }
-
-        return results;
-    }
-
-    public ArrayList<Medium> findMediumByDescribtion(String desc){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size()>0){
-            for (Medium m: mediaList) {
-                if(m.getDescription()!=null&&m.getDescription().contains(desc)){
-                    results.add(m);
-                }
-            }
-        }
-
-        return results;
-    }
-
-    public ArrayList<Medium> findMediumByLocation(String loc){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size()>0){
-            for (Medium m: mediaList) {
-                if(m.getLocation()!=null&&m.getLocation().contains(loc)){
-                    results.add(m);
-                }
-            }
-        }
-
-        return results;
-    }
-
-    public ArrayList<Medium> findMediumByBorrower(User borrower){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size()>0){
-            for (Medium m: mediaList) {
-                if(m.getBorrowedBy()!=null&&m.getBorrowedBy()==borrower){
-                    results.add(m);
-                }
-            }
-        }
-
-        return results;
-    }
 
     public ArrayList<Medium> getMediaList() {
         return mediaList;
     }
 
 
-    public ArrayList<Medium> findMediumByISBN(String isbn){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size() > 0){
-            for(Medium m: mediaList){
-                if (m instanceof Book){
-                    if (((Book) m).getISBN().equals(isbn))
-                        results.add(m);
-                }
-            }
-        }
-        return results;
-    }
-
-
-    public ArrayList<Medium> findMediumByBarcode(String barcode){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mediaList.size() > 0){
-            for(Medium m: mediaList){
-                if (m instanceof Disc){
-                    if (((Book) m).getISBN().equals(barcode))
-                        results.add(m);
-                }
-            }
-        }
-        return results;
-    }
 
 
 
