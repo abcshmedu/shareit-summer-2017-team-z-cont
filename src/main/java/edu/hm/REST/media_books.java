@@ -14,7 +14,11 @@ import java.util.ArrayList;
 @Path("/media/books")
 public class media_books {
 
-    private MediumAdministartion mAdm = new MediumAdministartion();
+
+    /**
+     * create ctor to get the logic
+     */
+    private MediaAdminAccess mAdm = new MediaAdminAccess();
 
 
     /**
