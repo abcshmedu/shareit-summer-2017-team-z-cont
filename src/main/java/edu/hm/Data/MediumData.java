@@ -1,10 +1,7 @@
 package edu.hm.Data;
 
 import edu.hm.Logic.MediumDataAccess;
-import edu.hm.model.Book;
-import edu.hm.model.Disc;
-import edu.hm.model.Medium;
-import edu.hm.model.User;
+import edu.hm.model.*;
 
 import java.util.ArrayList;
 
@@ -15,24 +12,33 @@ public class MediumData implements MediumDataAccess {
 
     // we need the same list over all instances.
     private ArrayList<Medium> mediaList;
+    private ArrayList<Copy> copies;
 
 
     public MediumData(){
         mediaList = new ArrayList<>();
+        copies = new ArrayList<>();
     }
 
     public MediumData(ArrayList<Medium> mediaCatalogue){
         mediaList=mediaCatalogue;
     }
 
-    public Disc addMedium(int barcode, User owner, String titel, String description, String location) {
-        Disc newDisc = new Disc(barcode, owner, titel, description, location);
+    public Disc addMedium(int barcode, String titel, String description) {
+        Disc newDisc = new Disc(barcode, titel, description);
         mediaList.add(newDisc);
         return newDisc;
     }
 
-    public Book addMedium(String isbn, User owner, String titel, String description, String location) {
-        Book newBook = new Book(isbn, owner, titel, description, location);
+    @Override
+    public Copy addCopy(User owner, Medium medium, String location) {
+        Copy newCopy = new Copy(owner, medium, location);
+        copies.add(newCopy);
+        return newCopy;
+    }
+
+    public Book addMedium(String isbn, String titel, String description) {
+        Book newBook = new Book(isbn, titel, description);
         mediaList.add(newBook);
         return newBook;
     }
@@ -43,9 +49,10 @@ public class MediumData implements MediumDataAccess {
         return mediaList;
     }
 
-
-
-
+    @Override
+    public ArrayList<Copy> getCopyList() {
+        return copies;
+    }
 
 
     @Override

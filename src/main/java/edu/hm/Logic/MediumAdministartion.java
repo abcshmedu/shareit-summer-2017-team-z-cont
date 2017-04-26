@@ -1,9 +1,6 @@
 package edu.hm.Logic;
 
-import edu.hm.model.Book;
-import edu.hm.model.Disc;
-import edu.hm.model.Medium;
-import edu.hm.model.User;
+import edu.hm.model.*;
 
 import java.util.ArrayList;
 
@@ -25,7 +22,7 @@ public class MediumAdministartion {
         String result = "something went wrong";
         if(checkValidISBN(isbn)){
             if(checkUserOK(owner)){
-            mdata.addMedium(isbn, owner, titel, description, location);
+            mdata.addMedium(isbn,titel, description);
             result = "OK";
         } else {result ="not Authorized";}}
         else{result= "invalid barcode";}
@@ -37,7 +34,7 @@ public class MediumAdministartion {
         String result = "something went wrong";
         if(checkValidBarcode(barcode)){
             if(checkUserOK(owner)){
-            mdata.addMedium(barcode, owner, titel, description, location);
+            mdata.addMedium(barcode, titel, description);
             result = "OK";
         } else {result ="not Authorized";}}
             else{result= "invalid barcode";}
@@ -97,12 +94,12 @@ public class MediumAdministartion {
 
 
 
-    public ArrayList<Medium> findMediumByOwner(User owner){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size()>0){
-            for (Medium m: mdata.getMediaList()) {
-                if(m.getOwner()!=null&&m.getOwner() == owner){
-                    results.add(m);
+    public ArrayList<Copy> findCopyByOwner(User owner){
+        ArrayList<Copy> results = new ArrayList<> ();
+        if(mdata.getCopyList().size()>0){
+            for (Copy c: mdata.getCopyList()) {
+                if(c.getOwner()!=null&&c.getOwner() == owner){
+                    results.add(c);
                 }
             }
         }
@@ -136,12 +133,12 @@ public class MediumAdministartion {
         return results;
     }
 
-    public ArrayList<Medium> findMediumByLocation(String loc){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size()>0){
-            for (Medium m: mdata.getMediaList()) {
-                if(m.getLocation()!=null&&m.getLocation().contains(loc)){
-                    results.add(m);
+    public ArrayList<Copy> findCopyByLocation(String loc){
+        ArrayList<Copy> results = new ArrayList<> ();
+        if(mdata.getCopyList().size()>0){
+            for (Copy c: mdata.getCopyList()) {
+                if(c.getLocation()!=null&&c.getLocation().contains(loc)){
+                    results.add(c);
                 }
             }
         }
@@ -149,12 +146,12 @@ public class MediumAdministartion {
         return results;
     }
 
-    public ArrayList<Medium> findMediumByBorrower(User borrower){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size()>0){
-            for (Medium m: mdata.getMediaList()) {
-                if(m.getBorrowedBy()!=null&&m.getBorrowedBy()==borrower){
-                    results.add(m);
+    public ArrayList<Copy> findCopyByBorrower(User borrower){
+        ArrayList<Copy> results = new ArrayList<> ();
+        if(mdata.getCopyList().size()>0){
+            for (Copy c: mdata.getCopyList()) {
+                if(c.getBorrowedBy()!=null&&c.getBorrowedBy()==borrower){
+                    results.add(c);
                 }
             }
         }

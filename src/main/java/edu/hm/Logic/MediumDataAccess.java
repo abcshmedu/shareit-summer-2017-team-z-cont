@@ -1,9 +1,6 @@
 package edu.hm.Logic;
 
-import edu.hm.model.Book;
-import edu.hm.model.Disc;
-import edu.hm.model.Medium;
-import edu.hm.model.User;
+import edu.hm.model.*;
 
 import java.util.ArrayList;
 
@@ -12,8 +9,10 @@ import java.util.ArrayList;
  */
 public interface MediumDataAccess {
 
-    Book addMedium(String isbn, User owner, String titel, String description, String location);
-    Disc addMedium(int barcode, User owner, String titel, String description, String location);
+    Book addMedium(String isbn, String titel, String description);
+    Disc addMedium(int barcode, String titel, String description);
+    Copy addCopy(User owner, Medium medium, String location);
     ArrayList<Medium> getMediaList();
+    ArrayList<Copy> getCopyList();
 
 }
