@@ -4,6 +4,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import edu.hm.Logic.MediumAdministartion;
 import edu.hm.model.Book;
+import javax.ws.rs.core.MediaType;
+import org.json.JSONObject;
 
 
 import java.util.ArrayList;
@@ -12,7 +14,11 @@ import java.util.ArrayList;
 @Path("/media/books")
 public class media_books {
 
-    private MediumAdministartion mAdm = new MediumAdministartion();
+
+    /**
+     * create ctor to get the logic
+     */
+    private MediaAdminAccess mAdm = new MediaAdminAccess();
 
 
     /**
@@ -49,7 +55,8 @@ public class media_books {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createBook(){
-
+    public String createBook(final JSONObject dataMsg){
+        System.out.println(dataMsg.toString());
+        return dataMsg.toString();
     }
 }
