@@ -18,10 +18,10 @@ public class MediumAdministartion {
     /**
      * create new book and test if all is correct
      */
-    public String createBook(String isbn, User owner, String titel, String description, String location){
+    public String createBook(String isbn, String titel, String description,User curUser){
         String result = "something went wrong";
         if(checkValidISBN(isbn)){
-            if(checkUserOK(owner)){
+            if(checkUserOK(curUser)){
             mdata.addMedium(isbn,titel, description);
             result = "OK";
         } else {result ="not Authorized";}}
@@ -30,10 +30,10 @@ public class MediumAdministartion {
         return result;
     }
 
-    public String createDisc(int barcode, User owner, String titel, String description, String location){
+    public String createDisc(int barcode, String titel, String description, User curUser){
         String result = "something went wrong";
         if(checkValidBarcode(barcode)){
-            if(checkUserOK(owner)){
+            if(checkUserOK(curUser)){
             mdata.addMedium(barcode, titel, description);
             result = "OK";
         } else {result ="not Authorized";}}
@@ -42,31 +42,54 @@ public class MediumAdministartion {
         return result;
     }
 
+    public String createCopy(User curUser, Medium medium, String location){
+        String result = "something went wrong";
+            if(checkUserOK(curUser)){
+                mdata.addCopy(curUser, medium, location);
+                result = "OK";
+            } else {result ="not Authorized";}
 
-    public ArrayList<Book> findMediumByISBN(String isbn){
-        ArrayList results = new ArrayList<Medium> ();
+        return result;
+    }
+
+
+    public Book findMediumByISBN(String isbn){
+        Book result = null;
         if(mdata.getMediaList().size() > 0){
             for(Medium m: mdata.getMediaList()){
                 if (m instanceof Book){
                     if (((Book) m).getISBN().equals(isbn))
-                        results.add(m);
+                        result = (Book) m;
                 }
             }
         }
-        return results;
+        return result;
     }
 
 
-    public ArrayList<Disc> findMediumByBarcode(int barcode){
-        ArrayList results = new ArrayList<Disc> ();
+    public Disc findMediumByBarcode(int barcode){
+        Disc result = null;
         if(mdata.getMediaList().size() > 0){
             for(Medium m: mdata.getMediaList()){
                 if (m instanceof Disc){
                     if (((Disc) m).getBARCODE() == barcode)
-                        results.add((Disc) m);
+                        result = (Disc) m;
                 }
             }
         }
+        return result;
+    }
+
+    public ArrayList<Copy> findCopyByMedium(Medium medium){
+        ArrayList<Copy> results = new ArrayList<> ();
+        if(mdata.getCopyList().size()>0){
+            for (Copy c: mdata.getCopyList()) {
+                if(c.getMedium().equals(medium)){
+                    results.add(c);
+                }
+            }
+        }
+
         return results;
     }
 
