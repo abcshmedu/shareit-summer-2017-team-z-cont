@@ -4,13 +4,9 @@ import edu.hm.Logic.MediumAdministartion;
 
 public class RestInter {
 
-    private MediaAdminAccess mAdm;
+    //private MediaAdminAccess mAdm;
 
-    public RestInter(MediumAdministartion mAdm){
-        this.mAdm = mAdm;
-    }
-
-    public MediaAdminAccess getmAdm() {
-        return mAdm;
+    public RestInter(MediaAdminAccess mediaAccess){
+        media_books.setAccess(mediaAccess);
     }
 }

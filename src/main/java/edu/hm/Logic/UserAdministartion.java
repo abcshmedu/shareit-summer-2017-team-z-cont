@@ -107,7 +107,7 @@ public class UserAdministartion {
         }
     }
 
-    protected User getCurrentUser(){
+    User getCurrentUser(){
         return currrentUser;
     }
 

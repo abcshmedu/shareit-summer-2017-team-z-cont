@@ -18,7 +18,7 @@ public class media_books {
     /**
      * create ctor to get the logic
      */
-    private MediaAdminAccess mAdm = new MediaAdminAccess();
+    private static MediaAdminAccess mAdm;
 
 
     /**
@@ -44,11 +44,11 @@ public class media_books {
     @GET
     @Path("{p}")
     public Response getBookByISBN(@PathParam("p") String isbn){
-        ArrayList<Book> retlist = new ArrayList<>();
-        retlist = mAdm.findMediumByISBN(isbn);
+        Book result;
+        result = mAdm.findMediumByISBN(isbn);
         return Response
                     .status(200)
-                    .entity(retlist.toString())
+                    .entity(result.toString())
                     .build();
 
     }
@@ -58,5 +58,10 @@ public class media_books {
     public String createBook(final JSONObject dataMsg){
         System.out.println(dataMsg.toString());
         return dataMsg.toString();
+    }
+
+
+    public static void setAccess(MediaAdminAccess mediaAccess) {
+        mAdm = mediaAccess;
     }
 }
