@@ -7,8 +7,8 @@ public class Disc extends Medium{
 
     private final int BARCODE;
 
-    public Disc(int barcode, User owner, String titel, String description, String location){
-        super(owner, titel, description, location);
+    public Disc(int barcode,String titel, String description){
+        super(titel, description);
         this.BARCODE = barcode;
     }
 

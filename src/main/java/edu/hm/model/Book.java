@@ -7,8 +7,8 @@ public class Book extends Medium{
 
     private final String ISBN;
 
-    public Book(String isbn, User owner, String titel, String description, String location){
-        super(owner, titel, description, location);
+    public Book(String isbn,String titel, String description){
+        super(titel, description);
         this.ISBN = isbn;
     }
 

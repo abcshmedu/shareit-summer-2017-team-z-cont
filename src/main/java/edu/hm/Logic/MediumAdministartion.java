@@ -3,7 +3,6 @@ package edu.hm.Logic;
 import edu.hm.model.Book;
 import edu.hm.model.Disc;
 import edu.hm.model.Medium;
-import edu.hm.Data.MediumData;
 import edu.hm.model.User;
 
 import java.util.ArrayList;
@@ -13,17 +12,35 @@ import java.util.ArrayList;
  */
 public class MediumAdministartion {
 
-    MediumData mdata = new MediumData();
+    MediumDataAccess mdata;
+
+    public MediumAdministartion(MediumDataAccess dataAccess){
+        mdata = dataAccess;
+    }
 
     /**
      * create new book and test if all is correct
      */
     public String createBook(String isbn, User owner, String titel, String description, String location){
         String result = "something went wrong";
-        if(checkValidISBN(isbn) && checkUserOK()){
-            mdata.addMedium(new Book(isbn, owner, titel, description, location));
+        if(checkValidISBN(isbn)){
+            if(checkUserOK(owner)){
+            mdata.addMedium(isbn, owner, titel, description, location);
             result = "OK";
-        }
+        } else {result ="not Authorized";}}
+        else{result= "invalid barcode";}
+
+        return result;
+    }
+
+    public String createDisc(int barcode, User owner, String titel, String description, String location){
+        String result = "something went wrong";
+        if(checkValidBarcode(barcode)){
+            if(checkUserOK(owner)){
+            mdata.addMedium(barcode, owner, titel, description, location);
+            result = "OK";
+        } else {result ="not Authorized";}}
+            else{result= "invalid barcode";}
 
         return result;
     }
@@ -147,13 +164,13 @@ public class MediumAdministartion {
 
 
     public boolean checkValidISBN(String isbn){return true;}
-    public boolean checkValidBarcode(){return true;}
+    public boolean checkValidBarcode(int barcode){return true;}
 
     /**
      * check if the user is ok.
      * @return
      */
-    public boolean checkUserOK(){return true;}
+    public boolean checkUserOK(User user){return true;}
 
 
 }

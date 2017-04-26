@@ -107,6 +107,10 @@ public class UserAdministartion {
         }
     }
 
+    protected User getCurrentUser(){
+        return currrentUser;
+    }
+
     /**
     public boolean changePassword(User self, String passwordOld, String passwordNew){
         boolean worked = false;

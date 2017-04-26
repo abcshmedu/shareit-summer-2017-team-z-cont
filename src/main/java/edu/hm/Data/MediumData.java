@@ -14,20 +14,27 @@ import java.util.ArrayList;
 public class MediumData implements MediumDataAccess {
 
     // we need the same list over all instances.
-    private ArrayList<Medium> mediaList = new ArrayList<>();
+    private ArrayList<Medium> mediaList;
 
 
     public MediumData(){
-        // we need the same list over all instances.
-        //mediaList = new ArrayList<>();
+        mediaList = new ArrayList<>();
     }
 
     public MediumData(ArrayList<Medium> mediaCatalogue){
         mediaList=mediaCatalogue;
     }
 
-    public void addMedium(Medium m) {
-        mediaList.add(m);
+    public Disc addMedium(int barcode, User owner, String titel, String description, String location) {
+        Disc newDisc = new Disc(barcode, owner, titel, description, location);
+        mediaList.add(newDisc);
+        return newDisc;
+    }
+
+    public Book addMedium(String isbn, User owner, String titel, String description, String location) {
+        Book newBook = new Book(isbn, owner, titel, description, location);
+        mediaList.add(newBook);
+        return newBook;
     }
 
 
