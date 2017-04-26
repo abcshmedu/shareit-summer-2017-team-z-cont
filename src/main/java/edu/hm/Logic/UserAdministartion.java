@@ -14,6 +14,7 @@ public class UserAdministartion {
 
     public UserAdministartion(UserDataAccess dataAccess){
         userDataAccess = dataAccess;
+        createAdmin("AdminOne","Admin");
     }
 
     public User createUser(String username, String password){
