@@ -8,5 +8,6 @@ public class RestInter {
 
     public RestInter(MediaAdminAccess mediaAccess){
         media_books.setAccess(mediaAccess);
+        CreateTestSet.setAccess(mediaAccess);
     }
 }
