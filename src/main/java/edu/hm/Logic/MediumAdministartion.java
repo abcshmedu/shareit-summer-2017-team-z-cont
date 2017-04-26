@@ -204,13 +204,40 @@ public class MediumAdministartion implements MediaAdminAccess {
 
         return isValid;
     }
-    private boolean checkValidBarcode(int barcode){return true;}
+    private boolean checkValidBarcode(int barcode){
+        boolean isValid = false;
+        String temp = Integer.toString(barcode);
+        if(temp.length()!=13){
+            isValid = false;
+        }else {
+            int[] barcodeArray = new int[temp.length()];
+            for (int i = 0; i < temp.length(); i++) {
+                barcodeArray[i] = temp.charAt(i) - '0';
+            }
+            isValid = calculateCheckDigit(barcodeArray)==barcodeArray[13];
+        }
 
+
+        return isValid;}
+
+
+    public int calculateCheckDigit(int[] digits) {
+        int sum = 0;
+        int multiplier = 3;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            sum += digits[i] * multiplier;
+            multiplier = (multiplier == 3) ? 1 : 3;
+        }
+       int sumPlus9 = sum + 9;
+       int nextMultipleOfTen = sumPlus9 - (sumPlus9 % 10); // nextMultipleOfTen ist jetzt das nächste Vielfache von zehn
+       return nextMultipleOfTen - sum;
+     }
 
     /**
      * check if the user is ok.
      * @return
      */
     private boolean checkUserOK(User user){return user.isActivated();}
+
 
 }
