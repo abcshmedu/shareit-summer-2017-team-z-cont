@@ -23,20 +23,20 @@ public class MediumAdministartion implements MediaAdminAccess {
         String result = "something went wrong";
         if(checkValidISBN(isbn)){
             if(checkUserOK(curUser)){
-            mdata.addMedium(isbn,titel, description);
-            result = "OK";
+
+            result = mdata.addMedium(isbn,titel, description);
         } else {result ="not Authorized";}}
-        else{result= "invalid barcode";}
+        else{result= "invalid isbn";}
 
         return result;
     }
 
-    public String createDisc(int barcode, String titel, String description, User curUser){
+    public String createDisc(String barcode, String titel, String description, User curUser){
         String result = "something went wrong";
         if(checkValidBarcode(barcode)){
             if(checkUserOK(curUser)){
-            mdata.addMedium(barcode, titel, description);
-            result = "OK";
+
+            result = mdata.addDisc(barcode, titel, description);
         } else {result ="not Authorized";}}
             else{result= "invalid barcode";}
 
@@ -68,12 +68,12 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
 
-    public Disc findMediumByBarcode(int barcode){
+    public Disc findMediumByBarcode(String barcode){
         Disc result = null;
         if(mdata.getMediaList().size() > 0){
             for(Medium m: mdata.getMediaList()){
                 if (m instanceof Disc){
-                    if (((Disc) m).getBARCODE() == barcode)
+                    if (((Disc) m).getBARCODE().equals(barcode))
                         result = (Disc) m;
                 }
             }
@@ -204,9 +204,9 @@ public class MediumAdministartion implements MediaAdminAccess {
 
         return isValid;
     }
-    private boolean checkValidBarcode(int barcode){
+    private boolean checkValidBarcode(String barcode){
         boolean isValid = false;
-        String temp = Integer.toString(barcode);
+        String temp = barcode;
         if(temp.length()!=13){
             isValid = false;
         }else {

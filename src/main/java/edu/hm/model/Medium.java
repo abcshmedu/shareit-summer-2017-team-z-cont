@@ -32,4 +32,15 @@ public abstract class Medium {
                 ", description='" + description +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object other){
+        boolean isEqual = false;
+        if(other!=null) {
+            if(other instanceof Medium){
+                isEqual = other.toString().equals(this.toString());
+            }
+        }
+        return isEqual;
+    }
 }

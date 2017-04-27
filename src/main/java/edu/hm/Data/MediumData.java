@@ -24,10 +24,20 @@ public class MediumData implements MediumDataAccess {
         mediaList=mediaCatalogue;
     }
 
-    public Disc addMedium(int barcode, String titel, String description) {
+    public String addDisc(String barcode, String titel, String description) {
+        String answer = "exists already";
         Disc newDisc = new Disc(barcode, titel, description);
-        mediaList.add(newDisc);
-        return newDisc;
+        boolean exists = false;
+        for (Medium m : mediaList) {
+            if(m.equals(newDisc)){
+                exists = true;
+            }
+        }
+        if(!exists) {
+            mediaList.add(newDisc);
+            answer = "OK";
+        }
+        return answer;
     }
 
     @Override
@@ -37,10 +47,20 @@ public class MediumData implements MediumDataAccess {
         return newCopy;
     }
 
-    public Book addMedium(String isbn, String titel, String description) {
+    public String addMedium(String isbn, String titel, String description) {
+        String answer = "exists already";
         Book newBook = new Book(isbn, titel, description);
-        mediaList.add(newBook);
-        return newBook;
+        boolean exists = false;
+        for (Medium m : mediaList) {
+            if(m.equals(newBook)){
+                exists = true;
+            }
+        }
+        if(!exists) {
+            mediaList.add(newBook);
+            answer = "OK";
+        }
+        return answer;
     }
 
 

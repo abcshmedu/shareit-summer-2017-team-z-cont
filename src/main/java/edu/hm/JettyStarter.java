@@ -27,8 +27,6 @@ public class JettyStarter {
         MediumData mdata = new MediumData();
         MediumAdministartion mAdm = new MediumAdministartion(mdata);
         RestInter rest = new RestInter(mAdm);
-
-
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();

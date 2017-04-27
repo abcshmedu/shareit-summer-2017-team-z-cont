@@ -28,7 +28,7 @@ public class Bla {
         System.out.println(test.getClichedMessage());
 
         media_books media = new media_books();
-        System.out.println(media.getClichedMessage());
+      //  System.out.println(media.getClichedMessage());
     }
 
 }

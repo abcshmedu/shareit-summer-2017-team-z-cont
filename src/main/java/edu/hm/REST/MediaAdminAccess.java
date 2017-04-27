@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public interface MediaAdminAccess {
 
     String createBook(String isbn, String titel, String description,User curUser);
-    String createDisc(int barcode, String titel, String description, User curUser);
+    String createDisc(String barcode, String titel, String description, User curUser);
     String createCopy(User curUser, Medium medium, String location);
     Book findMediumByISBN(String isbn);
-    Disc findMediumByBarcode(int barcode);
+    Disc findMediumByBarcode(String barcode);
     ArrayList<Copy> findCopyByMedium(Medium medium);
     ArrayList<Book> getAllBooks();
     ArrayList<Disc> getAllDiscs();

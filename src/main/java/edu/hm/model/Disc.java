@@ -5,14 +5,25 @@ package edu.hm.model;
  */
 public class Disc extends Medium{
 
-    private final int BARCODE;
+    private final String BARCODE;
 
-    public Disc(int barcode,String titel, String description){
+    public Disc(String barcode,String titel, String description){
         super(titel, description);
         this.BARCODE = barcode;
     }
 
-    public int getBARCODE() {
+    public String getBARCODE() {
         return BARCODE;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        boolean isEqual = false;
+        if(other!=null){
+            if(other instanceof Disc){
+                isEqual =((Disc) other).getBARCODE().equals(this.getBARCODE());
+            }
+        }
+        return isEqual;
     }
 }

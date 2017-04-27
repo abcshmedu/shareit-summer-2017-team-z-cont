@@ -16,4 +16,15 @@ public class Book extends Medium{
         return ISBN;
     }
 
+    @Override
+    public boolean equals(Object other){
+        boolean isEqual = false;
+        if(other!=null){
+            if(other instanceof Book){
+                isEqual =((Book) other).getISBN().equals(this.getISBN());
+            }
+        }
+            return isEqual;
+    }
+
 }
