@@ -107,6 +107,7 @@ public class Media_books {
 
         String isbn = null;
         String titel = null;
+        String author = null;
         String description = null;
         String user = null;
         String password = null;
@@ -116,6 +117,7 @@ public class Media_books {
         try {
             isbn = obj.getString("isbn");
             titel = obj.getString("titel");
+            author = obj.getString("author");
             description = obj.getString("description");
             user = obj.getString("user");
             password = obj.getString("password");
