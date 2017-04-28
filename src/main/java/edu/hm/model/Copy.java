@@ -88,4 +88,20 @@ public class Copy {
     public void setBorrowedBy(User borrowedBy) {
         this.borrowedBy = borrowedBy;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Copy copy = (Copy) o;
+
+        if (isBorrowed() != copy.isBorrowed()) return false;
+        if (!getMedium().equals(copy.getMedium())) return false;
+        if (!getOwner().equals(copy.getOwner())) return false;
+        if (getLocation() != null ? !getLocation().equals(copy.getLocation()) : copy.getLocation() != null)
+            return false;
+        return getBorrowedBy() != null ? getBorrowedBy().equals(copy.getBorrowedBy()) : copy.getBorrowedBy() == null;
+
+    }
 }

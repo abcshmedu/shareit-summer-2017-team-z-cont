@@ -22,12 +22,11 @@ public class MediumAdministartion implements MediaAdminAccess {
     public String createBook(String isbn, String titel, String description,User curUser){
         String result = "something went wrong";
         if(checkValidISBN(isbn)){
+            System.out.print("fuck it");
             if(checkUserOK(curUser)){
-
             result = mdata.addMedium(isbn,titel, description);
         } else {result ="not Authorized";}}
         else{result= "invalid isbn";}
-
         return result;
     }
 
@@ -35,11 +34,9 @@ public class MediumAdministartion implements MediaAdminAccess {
         String result = "something went wrong";
         if(checkValidBarcode(barcode)){
             if(checkUserOK(curUser)){
-
             result = mdata.addDisc(barcode, titel, description);
         } else {result ="not Authorized";}}
             else{result= "invalid barcode";}
-
         return result;
     }
 
@@ -49,7 +46,6 @@ public class MediumAdministartion implements MediaAdminAccess {
                 mdata.addCopy(curUser, medium, location);
                 result = "OK";
             } else {result ="not Authorized";}
-
         return result;
     }
 
@@ -186,7 +182,6 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     private boolean checkValidISBN(String isbn){
         boolean isValid = false;
-
         if(isbn.length()==13){
             int checkSum = 0;
             for(int i = 0; i <13; i++){
@@ -214,7 +209,7 @@ public class MediumAdministartion implements MediaAdminAccess {
             for (int i = 0; i < temp.length(); i++) {
                 barcodeArray[i] = temp.charAt(i) - '0';
             }
-            isValid = calculateCheckDigit(barcodeArray)==barcodeArray[13];
+            isValid = calculateCheckDigit(barcodeArray)==barcodeArray[12];
         }
 
 
