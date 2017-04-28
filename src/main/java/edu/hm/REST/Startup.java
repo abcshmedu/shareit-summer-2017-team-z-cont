@@ -1,5 +1,7 @@
 package edu.hm.REST;
 
+import edu.hm.model.User;
+
 import edu.hm.Data.MediumData;
 import edu.hm.Logic.MediumAdministartion;
 import javax.servlet.ServletContextEvent;
@@ -16,8 +18,12 @@ public class Startup implements ServletContextListener {
     {
         MediumData mdata = new MediumData();
         MediumAdministartion mediumadmin = new MediumAdministartion(mdata);
-        Media_books.setAccess(mediumadmin);
-        Media_disks.setAccess(mediumadmin);
+
+        User dummy = new User("dummy", "dummy");
+        dummy.setActivated(true);
+
+        Media_books.setAccess(mediumadmin, dummy);
+        Media_disks.setAccess(mediumadmin, dummy);
 
     }
 }
