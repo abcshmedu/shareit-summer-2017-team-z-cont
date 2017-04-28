@@ -25,7 +25,7 @@ public class Media_books {
      * create ctor to get the logic
      */
     private static MediaAdminAccess mAdm;
-
+    private static User dummy;
 
     /**
      * list all books.
@@ -81,18 +81,14 @@ public class Media_books {
 
             user = obj.getString("user");
             password = obj.getString("password");
-            if(user != null && password != null){
-                user1 = new User(user, password);
-            } else {
-                user1 = new User("dummy", "dummy");
-            }        } catch (JSONException e) {
+            } catch (JSONException e) {
             return Response.status(400)
                     .entity("your json is invalid")
                     .build();
         }
 
 
-        String result = mAdm.createBook(isbn, titel, "me", description, user1);
+        String result = mAdm.createBook(isbn, titel, "me", description, dummy);
 
         return Response
                 .status(200)
@@ -107,6 +103,7 @@ public class Media_books {
 
         String isbn = null;
         String titel = null;
+        String author = null;
         String description = null;
         String user = null;
         String password = null;
@@ -116,23 +113,16 @@ public class Media_books {
         try {
             isbn = obj.getString("isbn");
             titel = obj.getString("titel");
+            author = obj.getString("author");
             description = obj.getString("description");
             user = obj.getString("user");
             password = obj.getString("password");
-            if(user != null && password != null){
-                user1 = new User(user, password);
-            } else {
-                user1 = new User("dummy", "dummy");
-            }
         } catch (JSONException e) {
-            return Response
-                    .status(401)
-                    .entity("your json is invalid")
-                    .build();
+
         }
 
 
-        String result = mAdm.editBook(isbn, titel, "me", description, user1);
+        String result = mAdm.editBook(isbn, titel, author, description, dummy);
 
         return Response
                 .status(200)
@@ -143,7 +133,8 @@ public class Media_books {
 
 
 
-        public static void setAccess(MediaAdminAccess mediaAccess) {
+        public static void setAccess(MediaAdminAccess mediaAccess, User user) {
         mAdm = mediaAccess;
+        dummy = user;
     }
 }

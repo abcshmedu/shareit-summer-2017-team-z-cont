@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 // The Java class will be hosted at the URI path "/helloworld"
-@Path("/media/books")
+@Path("/media/discs")
 public class Media_disks {
 
 
@@ -26,6 +26,7 @@ public class Media_disks {
      * create ctor to get the logic
      */
     private static MediaAdminAccess mAdm;
+    private static User dummy;
 
 
     /**
@@ -78,18 +79,15 @@ public class Media_disks {
             description = obj.getString("description");
             user = obj.getString("user");
             password = obj.getString("password");
-            if(user != null && password != null){
-                user1 = new User(user, password);
-            } else {
-                user1 = new User("dummy", "dummy");
-            }        } catch (JSONException e) {
+
+        } catch (JSONException e) {
             return Response.status(400)
                     .entity("your json is invalid")
                     .build();
         }
 
 
-        String result = mAdm.createDisc(barcode, titel, description, user1);
+        String result = mAdm.createDisc(barcode, titel, description, dummy);
         return Response
                 .status(200)
                 .entity(result)
@@ -115,20 +113,12 @@ public class Media_disks {
             description = obj.getString("description");
             user = obj.getString("user");
             password = obj.getString("password");
-            if(user != null && password != null){
-                user1 = new User(user, password);
-            } else {
-                user1 = new User("dummy", "dummy");
-            }
+
         } catch (JSONException e) {
-            return Response
-                    .status(401)
-                    .entity("your json is invalid")
-                    .build();
         }
 
 
-        String result = mAdm.editDisc(barcode, titel, description, user1);
+        String result = mAdm.editDisc(barcode, titel, description, dummy);
         return Response
                 .status(200)
                 .entity(result)
@@ -138,7 +128,7 @@ public class Media_disks {
 
 
 
-        public static void setAccess(MediaAdminAccess mediaAccess) {
+    public static void setAccess(MediaAdminAccess mediaAccess, User user) {
         mAdm = mediaAccess;
-    }
-}
+        dummy = user;
+    }}
