@@ -92,7 +92,8 @@ public class Media_books {
         }
 
 
-        String result = mAdm.createBook(isbn, titel, author, description, user1);
+        String result = mAdm.createBook(isbn, titel, "me", description, user1);
+
         return Response
                 .status(200)
                 .entity(result)
@@ -131,7 +132,8 @@ public class Media_books {
         }
 
 
-        String result = mAdm.editBook(isbn, titel, description, user1);
+        String result = mAdm.editBook(isbn, titel, author, description, user1);
+
         return Response
                 .status(200)
                 .entity(result)
