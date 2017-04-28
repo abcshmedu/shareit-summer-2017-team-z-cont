@@ -43,4 +43,12 @@ public abstract class Medium {
         }
         return isEqual;
     }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

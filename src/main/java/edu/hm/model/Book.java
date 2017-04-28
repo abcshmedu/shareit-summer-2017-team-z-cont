@@ -6,14 +6,24 @@ package edu.hm.model;
 public class Book extends Medium{
 
     private final String ISBN;
+    private String author;
 
-    public Book(String isbn,String titel, String description){
+    public Book(String isbn,String titel, String author, String description){
         super(titel, description);
         this.ISBN = isbn;
+        this.author = author;
     }
 
     public String getISBN() {
         return ISBN;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
@@ -26,5 +36,6 @@ public class Book extends Medium{
         }
             return isEqual;
     }
+
 
 }

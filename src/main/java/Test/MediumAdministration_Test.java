@@ -32,7 +32,7 @@ public class MediumAdministration_Test {
         testUser.setActivated(true);
         assertEquals(testedAdminstration.createBook("12", "testbook", "just a test", testUser), "invalid isbn");
         assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "OK");
-        assertEquals(testedAdminstration.createDisc("9783161484100", "testbook", "just a test", testUser), "exists already");
+        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "exists already");
         testUser.setActivated(false);
         assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "not Authorized");
     }

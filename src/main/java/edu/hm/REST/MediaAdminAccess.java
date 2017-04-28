@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface MediaAdminAccess {
 
-    String createBook(String isbn, String titel, String description,User curUser);
+    String createBook(String isbn, String titel, String author, String description,User curUser);
     String createDisc(String barcode, String titel, String description, User curUser);
     String createCopy(User curUser, Medium medium, String location);
     Book findMediumByISBN(String isbn);

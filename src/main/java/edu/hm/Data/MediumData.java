@@ -47,9 +47,9 @@ public class MediumData implements MediumDataAccess {
         return newCopy;
     }
 
-    public String addMedium(String isbn, String titel, String description) {
+    public String addMedium(String isbn, String titel, String author, String description) {
         String answer = "exists already";
-        Book newBook = new Book(isbn, titel, description);
+        Book newBook = new Book(isbn, titel, author, description);
         boolean exists = false;
         for (Medium m : mediaList) {
             if(m.equals(newBook)){

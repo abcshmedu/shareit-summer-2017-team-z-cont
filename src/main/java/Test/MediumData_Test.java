@@ -13,6 +13,13 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class MediumData_Test {
 
+    public static void main(String... args){
+        MediumData_Test tester = new MediumData_Test();
+        tester.testAdds();
+        tester.testSearch();
+        tester.testToString();
+    }
+
     public void testAdds(){
         MediumData mediumData = new MediumData();
         assertEquals(mediumData.addMedium("9783161484100", "testbook", "just a test"), "OK");
@@ -21,7 +28,7 @@ public class MediumData_Test {
         assertEquals(mediumData.addDisc("9783161484100", "testDisc", "just a test"), "exists already");
         Medium original = new Book("9783161484100", "testbook", "just a test");
         User testUser = new User("Username", "Passwort");
-        assertEquals(mediumData.addCopy(testUser, original, "here"), "OK");
+        assertTrue(mediumData.addCopy(testUser, original, "here").equals(new Copy(testUser, original, "here")));
 
     }
 
@@ -38,7 +45,14 @@ public class MediumData_Test {
         mediumData.addCopy(new User("Username", "Passwort"), expectedList.get(0), "none");
         ArrayList<Copy> expectedCopies = new ArrayList<>();
         expectedCopies.add(new Copy(new User("Username", "Passwort"), expectedList.get(0), "none"));
-        assertEquals(mediumData.getCopyList(), expectedCopies);
+        assertTrue(mediumData.getCopyList().equals(expectedCopies));
 
+    }
+
+    public void testToString(){
+        ArrayList<Medium> mediumList = new ArrayList<Medium>();
+        MediumData mediumData = new MediumData(mediumList);
+        assertEquals(mediumData.toString(), "mediaList=" + mediumList +
+                '}');
     }
 }

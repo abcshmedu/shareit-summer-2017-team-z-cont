@@ -68,4 +68,21 @@ public class User {
                 ", surname='" + surname + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (isAdmin() != user.isAdmin()) return false;
+        if (isActivated() != user.isActivated()) return false;
+        if (!getUsername().equals(user.getUsername())) return false;
+        if (getForename() != null ? !getForename().equals(user.getForename()) : user.getForename() != null)
+            return false;
+        if (getSurname() != null ? !getSurname().equals(user.getSurname()) : user.getSurname() != null) return false;
+        return getPassword().equals(user.getPassword());
+
+    }
 }
