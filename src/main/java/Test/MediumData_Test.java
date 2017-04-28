@@ -22,8 +22,8 @@ public class MediumData_Test {
 
     public void testAdds(){
         MediumData mediumData = new MediumData();
-        assertEquals(mediumData.addMedium("9783161484100", "testbook", "me", "just a test"), "OK");
-        assertEquals(mediumData.addMedium("9783161484100", "testbook", "me", "just a test"), "exists already");
+        assertEquals(mediumData.addBook("9783161484100", "testbook", "me", "just a test"), "OK");
+        assertEquals(mediumData.addBook("9783161484100", "testbook", "me", "just a test"), "exists already");
         assertEquals(mediumData.addDisc("9783161484100", "testDisc", "just a test"), "OK");
         assertEquals(mediumData.addDisc("9783161484100", "testDisc", "just a test"), "exists already");
         Medium original = new Book("9783161484100", "testbook", "me", "just a test");
@@ -35,7 +35,7 @@ public class MediumData_Test {
     public void testSearch(){
 
         MediumData mediumData = new MediumData();
-        mediumData.addMedium("9783161484100", "testbook", "me", "just a test");
+        mediumData.addBook("9783161484100", "testbook", "me", "just a test");
         mediumData.addDisc("9783161484100", "testDisc", "just a test");
         ArrayList<Medium> expectedList = new ArrayList();
         expectedList.add(new Book("9783161484100", "testbook", "me", "just a test"));

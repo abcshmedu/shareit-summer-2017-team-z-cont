@@ -9,78 +9,101 @@ import java.util.ArrayList;
  * Created by Maximilian on 21.04.2017.
  */
 public class MediumAdministartion implements MediaAdminAccess {
+    private static final int ISBN_LENGTH = 13;
+    private static final int TEN = 10;
+    /**
+     * Data-Layer access.
+     */
+    private MediumDataAccess mdata;
 
-    MediumDataAccess mdata;
-
-    public MediumAdministartion(MediumDataAccess dataAccess){
+    /**
+     * c-tor with a given data-Layer access.
+     * @param dataAccess the DataLayer Object that will be used through the interface Medium DataAccess.
+     */
+    public MediumAdministartion(MediumDataAccess dataAccess) {
         mdata = dataAccess;
     }
 
-    /**
-     * create new book and test if all is correct
-     */
-    public String createBook(String isbn, String titel, String author, String description,User curUser){
+    @Override
+    public String createBook(String isbn, String titel, String author, String description, User curUser) {
         String result = "something went wrong";
-        if(checkValidISBN(isbn)){
-            if(checkUserOK(curUser)){
-            result = mdata.addMedium(isbn,titel, author, description);
-        } else {result ="not Authorized";}}
-        else{result= "invalid isbn";}
+        if (checkValidISBN(isbn)) {
+            if (checkUserOK(curUser)) {
+            result = mdata.addBook(isbn, titel, author, description);
+        } else {
+                result = "not Authorized";
+            }
+        }
+        else {
+            result = "invalid isbn";
+        }
         return result;
     }
 
-    public String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser){
+    @Override
+    public String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
         String result = "something went wrong";
-        if(checkValidBarcode(barcode)){
-            if(checkUserOK(curUser)){
+        if (checkValidBarcode(barcode)) {
+            if (checkUserOK(curUser)) {
             result = mdata.addDisc(barcode, titel, director, fsk, description);
-        } else {result ="not Authorized";}}
-            else{result= "invalid barcode";}
+        } else {
+                result = "not Authorized";
+            }
+        }
+            else {
+            result = "invalid barcode";
+        }
         return result;
     }
 
-    public String createCopy(User curUser, Medium medium, String location){
+    @Override
+    public String createCopy(User curUser, Medium medium, String location) {
         String result = "something went wrong";
-            if(checkUserOK(curUser)){
+            if (checkUserOK(curUser)) {
                 mdata.addCopy(curUser, medium, location);
                 result = "OK";
-            } else {result ="not Authorized";}
+            } else {
+                result = "not Authorized";
+            }
         return result;
     }
 
-
-    public Book findMediumByISBN(String isbn){
+  @Override
+    public Book findMediumByISBN(String isbn) {
         Book result = null;
-        if(mdata.getMediaList().size() > 0){
-            for(Medium m: mdata.getMediaList()){
-                if (m instanceof Book){
-                    if (((Book) m).getISBN().equals(isbn))
+        if (mdata.getMediaList().size() > 0) {
+            for (Medium m: mdata.getMediaList()) {
+                if (m instanceof Book) {
+                    if (((Book) m).getISBN().equals(isbn)) {
                         result = (Book) m;
+                    }
                 }
             }
         }
         return result;
     }
 
-
-    public Disc findMediumByBarcode(String barcode){
+    @Override
+    public Disc findMediumByBarcode(String barcode) {
         Disc result = null;
-        if(mdata.getMediaList().size() > 0){
-            for(Medium m: mdata.getMediaList()){
-                if (m instanceof Disc){
-                    if (((Disc) m).getBARCODE().equals(barcode))
+        if (mdata.getMediaList().size() > 0) {
+            for (Medium m: mdata.getMediaList()) {
+                if (m instanceof Disc) {
+                    if (((Disc) m).getBARCODE().equals(barcode)) {
                         result = (Disc) m;
+                    }
                 }
             }
         }
         return result;
     }
 
-    public ArrayList<Copy> findCopyByMedium(Medium medium){
-        ArrayList<Copy> results = new ArrayList<> ();
-        if(mdata.getCopyList().size()>0){
+    @Override
+    public ArrayList<Copy> findCopyByMedium(Medium medium) {
+        ArrayList<Copy> results = new ArrayList<>();
+        if (mdata.getCopyList().size() > 0) {
             for (Copy c: mdata.getCopyList()) {
-                if(c.getMedium().equals(medium)){
+                if (c.getMedium().equals(medium)) {
                     results.add(c);
                 }
             }
@@ -89,35 +112,39 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public ArrayList<Book> getAllBooks(){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size() > 0){
-            for(Medium m: mdata.getMediaList()){
-                if (m instanceof Book)
-                        results.add((Book) m);
+    @Override
+    public ArrayList<Book> getAllBooks() {
+        ArrayList results = new ArrayList<Medium>();
+        if (mdata.getMediaList().size() > 0) {
+            for (Medium m: mdata.getMediaList()) {
+                if (m instanceof Book) {
+                    results.add((Book) m);
+                }
                 }
             }
         return results;
     }
 
-    public ArrayList<Disc> getAllDiscs(){
-        ArrayList results = new ArrayList<Disc> ();
-        if(mdata.getMediaList().size() > 0){
-            for(Medium m: mdata.getMediaList()){
-                if (m instanceof Disc)
+    @Override
+    public ArrayList<Disc> getAllDiscs() {
+        ArrayList results = new ArrayList<Disc>();
+        if (mdata.getMediaList().size() > 0) {
+            for (Medium m: mdata.getMediaList()) {
+                if (m instanceof Disc) {
                     results.add((Disc) m);
+                }
             }
         }
         return results;
     }
 
 
-
-    public ArrayList<Copy> findCopyByOwner(User owner){
-        ArrayList<Copy> results = new ArrayList<> ();
-        if(mdata.getCopyList().size()>0){
+    @Override
+    public ArrayList<Copy> findCopyByOwner(User owner) {
+        ArrayList<Copy> results = new ArrayList<>();
+        if (mdata.getCopyList().size() > 0) {
             for (Copy c: mdata.getCopyList()) {
-                if(c.getOwner()!=null&&c.getOwner() == owner){
+                if (c.getOwner() != null && c.getOwner() == owner) {
                     results.add(c);
                 }
             }
@@ -126,11 +153,12 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public ArrayList<Medium> findMediumByTitel(String titel){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size()>0){
+    @Override
+    public ArrayList<Medium> findMediumByTitel(String titel) {
+        ArrayList results = new ArrayList<Medium>();
+        if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
-                if(m.getTitel()!=null&&m.getTitel().contains(titel)){
+                if (m.getTitel() != null && m.getTitel().contains(titel)) {
                     results.add(m);
                 }
             }
@@ -139,11 +167,12 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public ArrayList<Medium> findMediumByDescribtion(String desc){
-        ArrayList results = new ArrayList<Medium> ();
-        if(mdata.getMediaList().size()>0){
+    @Override
+    public ArrayList<Medium> findMediumByDescribtion(String desc) {
+        ArrayList results = new ArrayList<Medium>();
+        if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
-                if(m.getDescription()!=null&&m.getDescription().contains(desc)){
+                if (m.getDescription() != null && m.getDescription().contains(desc)) {
                     results.add(m);
                 }
             }
@@ -152,11 +181,12 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public ArrayList<Copy> findCopyByLocation(String loc){
-        ArrayList<Copy> results = new ArrayList<> ();
-        if(mdata.getCopyList().size()>0){
+    @Override
+    public ArrayList<Copy> findCopyByLocation(String loc) {
+        ArrayList<Copy> results = new ArrayList<>();
+        if (mdata.getCopyList().size() > 0) {
             for (Copy c: mdata.getCopyList()) {
-                if(c.getLocation()!=null&&c.getLocation().contains(loc)){
+                if (c.getLocation() != null && c.getLocation().contains(loc)) {
                     results.add(c);
                 }
             }
@@ -165,11 +195,12 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public ArrayList<Copy> findCopyByBorrower(User borrower){
-        ArrayList<Copy> results = new ArrayList<> ();
-        if(mdata.getCopyList().size()>0){
+    @Override
+    public ArrayList<Copy> findCopyByBorrower(User borrower) {
+        ArrayList<Copy> results = new ArrayList<>();
+        if (mdata.getCopyList().size() > 0) {
             for (Copy c: mdata.getCopyList()) {
-                if(c.getBorrowedBy()!=null&&c.getBorrowedBy()==borrower){
+                if (c.getBorrowedBy() != null && c.getBorrowedBy() == borrower) {
                     results.add(c);
                 }
             }
@@ -178,8 +209,9 @@ public class MediumAdministartion implements MediaAdminAccess {
         return results;
     }
 
-    public String editBook(String isbn, String titel, String author, String description,User curUser){
-        if(checkUserOK(curUser)) {
+    @Override
+    public String editBook(String isbn, String titel, String author, String description, User curUser) {
+        if (checkUserOK(curUser)) {
             Book toBeEdited = findMediumByISBN(isbn);
             if (toBeEdited != null) {
                 if (titel == null) {
@@ -187,20 +219,23 @@ public class MediumAdministartion implements MediaAdminAccess {
                 } else
                 if (author == null) {
                     return "no Author";
-                }else {
+                } else {
                     toBeEdited.setTitel(titel);
                     toBeEdited.setAuthor(author);
                     if (description != null) {
                         toBeEdited.setDescription(description);
                     }
                 }
+            } else {
+                return "no Book found";
             }
         }
         return "OK";
     }
 
-    public String editDisc(String barcode, String titel, String director, int fsk, String description,User curUser){
-        if(checkUserOK(curUser)) {
+    @Override
+    public String editDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
+        if (checkUserOK(curUser)) {
             Disc toBeEdited = findMediumByBarcode(barcode);
             if (toBeEdited != null) {
                 if (titel == null) {
@@ -208,7 +243,7 @@ public class MediumAdministartion implements MediaAdminAccess {
                 } else
                 if (director == null) {
                     return "no Director";
-                }else {
+                } else {
                     toBeEdited.setTitel(titel);
                     toBeEdited.setDirector(director);
                     toBeEdited.setFsk(fsk);
@@ -216,59 +251,60 @@ public class MediumAdministartion implements MediaAdminAccess {
                         toBeEdited.setDescription(description);
                     }
                 }
+            } else {
+                return "no Book found";
             }
         }
         return "OK";
     }
 
-
+    /**
+     * chcks if the Isbn is valid.
+     * @param isbn the isbn that should be checked
+     * @return true if the isbn is valid otherwise false
+     */
     private boolean checkValidISBN(String isbn) {
-        if(isbn.length()==13){
-        return isbn.charAt(12) == isbn13CheckDigit(isbn);
-        }
-        else{
-            return false;
-        }
-    }
-    private boolean checkValidBarcode(String barcode) {
-        if (barcode.length() == 13) {
-            return barcode.charAt(12) == isbn13CheckDigit(barcode);
-        } else {
-            return false;
-        }
+        return (isbn.length() == ISBN_LENGTH) && (isbn.charAt(ISBN_LENGTH - 1) == isbn13CheckDigit(isbn));
+
     }
 
     /**
-     * check if the user is ok.
-     * @return
+     * checks if a Barcode is valid.
+     * @param barcode the barcode that should be checked
+     * @return true if it is valid otherwise false
      */
-    private boolean checkUserOK(User user){return user.isActivated();}
+    private boolean checkValidBarcode(String barcode) {
+        return (barcode.length() == ISBN_LENGTH) && (barcode.charAt(ISBN_LENGTH - 1) == isbn13CheckDigit(barcode));
+    }
+
+    /**
+     * checks if a user is activated.
+     * @param user the user to be chescked
+     * @return true if the user is activated otherwise false
+     */
+    private boolean checkUserOK(User user) {
+        return user.isActivated();
+    }
 
 
+    /**
+     * determiens the check char at the end of a given isbn or barcode
+     * @param str the code to be checked
+     * @return the char that should eb at the 13th position if the string is valid
+     */
     private char isbn13CheckDigit(String str) {
-        // Sum of the 12 digits.
         int sum = 0;
-        // Digits counted.
         int digits = 0;
-        // Start multiplier at 1. Alternates between 1 and 3.
         int multiplier = 1;
-        // Treat just the 1st 12 digits of the string.
-        for (int i = 0; i < str.length() && digits < 12; i++) {
-            // Pull out that character.
+        for (int i = 0; i < str.length() && digits < ISBN_LENGTH - 1; i++) {
             char c = str.charAt(i);
-            // Is it a digit?
             if ('0' <= c && c <= '9') {
-                // Keep the sum.
                 sum += multiplier * (c - '0');
-                // Flip multiplier between 1 and 3 by flipping the 2^1 bit.
                 multiplier ^= 2;
-                // Count the digits.
                 digits += 1;
             }
         }
-        // What is the check digit?
-        int checkDigit = (10 - (sum % 10)) % 10;
-        // Give it back to them in character form.
+        int checkDigit = (TEN - (sum % TEN)) % TEN;
         return (char) (checkDigit + '0');
     }
 
