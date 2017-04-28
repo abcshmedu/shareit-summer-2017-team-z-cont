@@ -79,7 +79,7 @@ public class RestBook_Test {
         /*
         TODO: test for wrong ISBN here and also in the method.
          */
-        got = booksTest.getBookByISBN("9888373191723").getEntity().toString();
+        //got = booksTest.getBookByISBN("9888373191723").getEntity().toString();
         //System.out.println(got);
     }
 
