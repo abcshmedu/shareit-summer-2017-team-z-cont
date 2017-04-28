@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 // The Java class will be hosted at the URI path "/helloworld"
-@Path("/media/books")
+@Path("/media/discs")
 public class Media_disks {
 
 
