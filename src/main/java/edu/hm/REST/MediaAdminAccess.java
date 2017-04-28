@@ -22,6 +22,8 @@ public interface MediaAdminAccess {
     ArrayList<Medium> findMediumByDescribtion(String desc);
     ArrayList<Copy> findCopyByLocation(String loc);
     ArrayList<Copy> findCopyByBorrower(User borrower);
+    String editDisc(String barcode, String titel, String description,User curUser);
+    String editBook(String isbn, String titel, String author, String description,User curUser);
 
 
 }

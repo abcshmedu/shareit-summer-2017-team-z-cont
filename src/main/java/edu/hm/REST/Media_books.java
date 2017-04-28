@@ -67,6 +67,8 @@ public class Media_books {
         String isbn;
         String titel;
         String description;
+        String author;
+
         String user;
         String password;
         User user1 = null;
@@ -75,6 +77,8 @@ public class Media_books {
             isbn = obj.getString("isbn");
             titel = obj.getString("titel");
             description = obj.getString("description");
+            author = obj.getString("author");
+
             user = obj.getString("user");
             password = obj.getString("password");
             if(user != null && password != null){
@@ -88,7 +92,7 @@ public class Media_books {
         }
 
 
-        String result = mAdm.createBook(isbn, titel, description, user1);
+        String result = mAdm.createBook(isbn, titel, author, description, user1);
         return Response
                 .status(200)
                 .entity(result)
@@ -127,7 +131,7 @@ public class Media_books {
         }
 
 
-        String result = mAdm.editBook(isbn, title, description, user1);
+        String result = mAdm.editBook(isbn, titel, description, user1);
         return Response
                 .status(200)
                 .entity(result)
