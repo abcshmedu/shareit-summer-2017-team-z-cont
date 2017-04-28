@@ -115,10 +115,6 @@ public class Media_disks {
             password = obj.getString("password");
 
         } catch (JSONException e) {
-            return Response
-                    .status(401)
-                    .entity("your json is invalid")
-                    .build();
         }
 
 

@@ -118,10 +118,7 @@ public class Media_books {
             user = obj.getString("user");
             password = obj.getString("password");
         } catch (JSONException e) {
-            return Response
-                    .status(401)
-                    .entity("your json is invalid")
-                    .build();
+
         }
 
 
