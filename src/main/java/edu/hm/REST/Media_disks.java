@@ -45,7 +45,7 @@ public class Media_disks {
 
     /**
      * list all books with isbn.
-     * @param isbn isbn
+     * @param barcode barcode
      * @return list of books with isbn
      */
     @GET
@@ -128,7 +128,7 @@ public class Media_disks {
         }
 
 
-        String result = mAdm.editDisc(barcode, title, description, user1);
+        String result = mAdm.editDisc(barcode, titel, description, user1);
         return Response
                 .status(200)
                 .entity(result)
