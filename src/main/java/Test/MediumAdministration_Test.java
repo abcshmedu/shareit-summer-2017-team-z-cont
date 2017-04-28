@@ -131,7 +131,6 @@ public class MediumAdministration_Test {
         assertEquals("no Titel", testedAdminstration.editDisc("9783161484100", null, "me", 1, "just a description", testUser));
         assertEquals("no Director", testedAdminstration.editDisc("9783161484100", "shit", null, 1, "just a description", testUser));
 
-
     }
 
 
