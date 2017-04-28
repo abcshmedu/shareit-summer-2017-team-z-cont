@@ -7,6 +7,8 @@ import edu.hm.model.Disc;
 import edu.hm.model.Medium;
 import edu.hm.model.User;
 
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
@@ -30,11 +32,11 @@ public class MediumAdministration_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        assertEquals(testedAdminstration.createBook("12", "testbook", "just a test", testUser), "invalid isbn");
-        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "OK");
-        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "exists already");
+        assertEquals(testedAdminstration.createBook("12", "testbook", "me", "just a test", testUser), "invalid isbn");
+        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "me", "just a test", testUser), "OK");
+        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "me", "just a test", testUser), "exists already");
         testUser.setActivated(false);
-        assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "just a test", testUser), "not Authorized");
+        assertEquals(testedAdminstration.createBook("9783161484100", "testbook",  "me", "just a test", testUser), "not Authorized");
     }
 
     public void testAddDisc(){
@@ -54,7 +56,7 @@ public class MediumAdministration_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Medium original = new Book("9783161484100", "testbook", "just a test");
+        Medium original = new Book("9783161484100", "testbook", "me", "just a test");
         assertEquals(testedAdminstration.createCopy(testUser, original, "here"), "OK");
         testUser.setActivated(false);
         assertEquals(testedAdminstration.createCopy(testUser, original, "here"), "not Authorized");
@@ -65,21 +67,46 @@ public class MediumAdministration_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Medium original = new Book("9783161484100", "testbook", "just a test");
+        Book testBook = new Book("9783161484100", "testBook", "me","just a test");
+        Disc testDisc = new Disc("9783161484100", "testDisc", "just a test");
+
         assertNull(testedAdminstration.findMediumByISBN("9783161484100"));
         assertNull(testedAdminstration.findMediumByBarcode("9783161484100"));
         assertTrue(testedAdminstration.findCopyByOwner(testUser).isEmpty());
         assertTrue(testedAdminstration.findCopyByLocation("here").isEmpty());
         assertTrue(testedAdminstration.findCopyByBorrower(testUser).isEmpty());
-        assertTrue(testedAdminstration.findCopyByMedium(original).isEmpty());
+        assertTrue(testedAdminstration.findCopyByMedium(testBook).isEmpty());
         assertTrue(testedAdminstration.findMediumByDescribtion("just a test").isEmpty());
         assertTrue(testedAdminstration.findMediumByTitel("testDisc").isEmpty());
         assertTrue(testedAdminstration.getAllBooks().isEmpty());
         assertTrue(testedAdminstration.getAllDiscs().isEmpty());
-        testedAdminstration.createBook("9783161484100", "testBook", "just a test", testUser);
+
+
+        testedAdminstration.createBook("9783161484100", "testBook", "me","just a test", testUser);
         testedAdminstration.createDisc("9783161484100", "testDisc", "just a test", testUser);
-        assertTrue(testedAdminstration.findMediumByISBN("9783161484100").equals(new Book("9783161484100", "testBook", "just a test")));
-        assertTrue(testedAdminstration.findMediumByBarcode("9783161484100").equals(new Disc("9783161484100", "testDisc", "just a test")));
+
+        ArrayList<Medium> testMedia = new ArrayList();
+        testMedia.add(testBook);
+        testMedia.add(testDisc);
+        ArrayList<Book> testBookList = new ArrayList<>();
+        testBookList.add(testBook);
+        ArrayList<Disc> testDiscList = new ArrayList<>();
+        testDiscList.add(testDisc);
+
+        assertTrue(testedAdminstration.findMediumByISBN("9783161484100").equals(testBook));
+        assertTrue(testedAdminstration.findMediumByBarcode("9783161484100").equals(testDisc));
+        assertTrue(testedAdminstration.findMediumByDescribtion("just a test").equals(testMedia));
+        assertTrue(testedAdminstration.findMediumByTitel("testDisc").equals(testMedia));
+        assertTrue(testedAdminstration.getAllBooks().equals(testBookList));
+        assertTrue(testedAdminstration.getAllDiscs().equals(testDiscList));
+
+        assertTrue(testedAdminstration.findCopyByOwner(testUser).isEmpty());
+        assertTrue(testedAdminstration.findCopyByLocation("here").isEmpty());
+        assertTrue(testedAdminstration.findCopyByBorrower(testUser).isEmpty());
+        assertTrue(testedAdminstration.findCopyByMedium(testBook).isEmpty());
+    }
+
+    public void testEdit(){
 
     }
 
