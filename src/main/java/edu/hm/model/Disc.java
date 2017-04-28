@@ -6,14 +6,34 @@ package edu.hm.model;
 public class Disc extends Medium{
 
     private final String BARCODE;
+    private String director;
+    private int fsk;
 
-    public Disc(String barcode,String titel, String description){
+    public Disc(String barcode,String titel, String director, int fsk, String description){
         super(titel, description);
         this.BARCODE = barcode;
+        this.director = director;
+        this.fsk = fsk;
     }
 
     public String getBARCODE() {
         return BARCODE;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public int getFsk() {
+        return fsk;
+    }
+
+    public void setFsk(int fsk) {
+        this.fsk = fsk;
     }
 
     @Override

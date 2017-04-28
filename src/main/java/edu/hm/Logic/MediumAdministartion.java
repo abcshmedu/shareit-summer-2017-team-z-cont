@@ -29,11 +29,11 @@ public class MediumAdministartion implements MediaAdminAccess {
         return result;
     }
 
-    public String createDisc(String barcode, String titel, String description, User curUser){
+    public String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser){
         String result = "something went wrong";
         if(checkValidBarcode(barcode)){
             if(checkUserOK(curUser)){
-            result = mdata.addDisc(barcode, titel, description);
+            result = mdata.addDisc(barcode, titel, director, fsk, description);
         } else {result ="not Authorized";}}
             else{result= "invalid barcode";}
         return result;
@@ -179,44 +179,46 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
     public String editBook(String isbn, String titel, String author, String description,User curUser){
-        String result = "OK";
         if(checkUserOK(curUser)) {
             Book toBeEdited = findMediumByISBN(isbn);
             if (toBeEdited != null) {
-                if (titel != null) {
+                if (titel == null) {
+                    return "no Titel";
+                } else
+                if (author == null) {
+                    return "no Author";
+                }else {
                     toBeEdited.setTitel(titel);
-                } else {
-                    result = "no Titel";
-                }
-                if (author != null) {
                     toBeEdited.setAuthor(author);
-                } else {
-                    result = "no Author";
-                }
-                if (description != null) {
-                    toBeEdited.setDescription(description);
+                    if (description != null) {
+                        toBeEdited.setDescription(description);
+                    }
                 }
             }
         }
-        return result;
+        return "OK";
     }
 
-    public String editDisc(String barcode, String titel, String description,User curUser){
-        String result = "OK";
+    public String editDisc(String barcode, String titel, String director, int fsk, String description,User curUser){
         if(checkUserOK(curUser)) {
             Disc toBeEdited = findMediumByBarcode(barcode);
             if (toBeEdited != null) {
-                if (titel != null) {
+                if (titel == null) {
+                    return "no Titel";
+                } else
+                if (director == null) {
+                    return "no Director";
+                }else {
                     toBeEdited.setTitel(titel);
-                } else {
-                    result = "no Titel";
-                }
-                if (description != null) {
-                    toBeEdited.setDescription(description);
+                    toBeEdited.setDirector(director);
+                    toBeEdited.setFsk(fsk);
+                    if (description != null) {
+                        toBeEdited.setDescription(description);
+                    }
                 }
             }
         }
-        return result;
+        return "OK";
     }
 
 

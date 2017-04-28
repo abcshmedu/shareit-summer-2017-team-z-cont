@@ -132,7 +132,7 @@ public class Media_books {
         }
 
 
-        String result = mAdm.editBook(isbn, titel, author, description, user1);
+        String result = mAdm.editBook(isbn, titel, "me", description, user1);
 
         return Response
                 .status(200)

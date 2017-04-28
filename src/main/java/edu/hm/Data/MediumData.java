@@ -24,9 +24,9 @@ public class MediumData implements MediumDataAccess {
         mediaList=mediaCatalogue;
     }
 
-    public String addDisc(String barcode, String titel, String description) {
+    public String addDisc(String barcode, String titel, String director, int fsk, String description) {
         String answer = "exists already";
-        Disc newDisc = new Disc(barcode, titel, description);
+        Disc newDisc = new Disc(barcode, titel, director, fsk, description);
         boolean exists = false;
         for (Medium m : mediaList) {
             if(m.equals(newDisc)){

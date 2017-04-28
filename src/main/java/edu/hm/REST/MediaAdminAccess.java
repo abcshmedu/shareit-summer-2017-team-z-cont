@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public interface MediaAdminAccess {
 
     String createBook(String isbn, String titel, String author, String description,User curUser);
-    String createDisc(String barcode, String titel, String description, User curUser);
+    String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser);
     String createCopy(User curUser, Medium medium, String location);
     String editBook(String isbn, String titel, String author, String description,User curUser);
-    String editDisc(String barcode, String titel, String description, User curUser);
+    String editDisc(String barcode, String titel, String director, int fsk, String description, User curUser);
     Book findMediumByISBN(String isbn);
     Disc findMediumByBarcode(String barcode);
     ArrayList<Copy> findCopyByMedium(Medium medium);
@@ -24,8 +24,5 @@ public interface MediaAdminAccess {
     ArrayList<Medium> findMediumByDescribtion(String desc);
     ArrayList<Copy> findCopyByLocation(String loc);
     ArrayList<Copy> findCopyByBorrower(User borrower);
-    String editDisc(String barcode, String titel, String description,User curUser);
-    String editBook(String isbn, String titel, String author, String description,User curUser);
-
 
 }
