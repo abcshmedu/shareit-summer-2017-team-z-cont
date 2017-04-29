@@ -52,10 +52,22 @@ public class Media_books {
     public Response getBookByISBN(@PathParam("p") String isbn){
         Book result;
         result = mAdm.findMediumByISBN(isbn);
-        return Response
+
+        /*
+        test for null in result
+         */
+
+        if(result != null) {
+            return Response
                     .status(200)
                     .entity(result.toString())
                     .build();
+        }else{
+            return Response
+                    .status(400)
+                    .entity("no book found")
+                    .build();
+        }
 
     }
 

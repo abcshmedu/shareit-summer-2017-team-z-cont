@@ -60,7 +60,7 @@ public class RestBook_Test {
         Media_books booksTest = new Media_books();
         booksTest.createBook("{'isbn': '9788373191723', 'titel' : 'HdR', 'description' : 'HdR', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
 
-        String currentbooks = "[Medium{, titel='test', description='test desc'}, Medium{, titel='HdR', description='HdR'}]";
+        String currentbooks = "[Medium: {'titel':'test', 'description':'test desc'}, Medium: {'titel':'HdR', 'description':'HdR'}]";
         String got = booksTest.getAllBooks().getEntity().toString();
         assertTrue(got.equals(currentbooks));
     }
@@ -72,15 +72,13 @@ public class RestBook_Test {
         testUser.setActivated(true);
         Media_books booksTest = new Media_books();
 
-        String book = "Medium{, titel='HdR', description='HdR'}";
+        String book = "Medium: {'titel':'HdR', 'description':'HdR'}";
         String got = booksTest.getBookByISBN("9788373191723").getEntity().toString();
         assertTrue(got.equals(book));
 
-        /*
-        TODO: test for wrong ISBN here and also in the method.
-         */
-        //got = booksTest.getBookByISBN("9888373191723").getEntity().toString();
-        //System.out.println(got);
+        String noBook = "no book found";
+        got = booksTest.getBookByISBN("9888373191723").getEntity().toString();
+        assertTrue(got.equals(noBook));
     }
 
     public void testUpdateBook() {
