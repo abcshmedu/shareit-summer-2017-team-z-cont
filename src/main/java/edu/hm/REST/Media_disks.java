@@ -35,13 +35,20 @@ public class Media_disks {
      */
     @GET
     @Produces("application/json")
-    public Response getAllDisvs() {
+    public Response getAllDiscs() {
         ArrayList<Disc> retlist = new ArrayList<>();
         retlist = mAdm.getAllDiscs();
-        return Response
-                .status(200)
-                .entity(retlist.toString())
-                .build();
+        if(retlist != null) {
+            return Response
+                    .status(200)
+                    .entity(retlist.toString())
+                    .build();
+        }else {
+            return Response
+                    .status(400)
+                    .entity("no disc found")
+                    .build();
+        }
     }
 
     /**
@@ -54,10 +61,17 @@ public class Media_disks {
     public Response getDiscByBarcode(@PathParam("p") String barcode){
         Disc result;
         result = mAdm.findMediumByBarcode(barcode);
-        return Response
+        if(result != null) {
+            return Response
                     .status(200)
                     .entity(result.toString())
                     .build();
+        }else {
+            return Response
+                    .status(400)
+                    .entity("no disc found")
+                    .build();
+        }
 
     }
 
@@ -114,7 +128,7 @@ public class Media_disks {
 
 
         try {
-            barcode = obj.getString("isbn");
+            barcode = obj.getString("barcode");
             titel = obj.getString("titel");
             description = obj.getString("description");
             director = obj.getString("director");
