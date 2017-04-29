@@ -69,6 +69,8 @@ public class Media_disks {
         String barcode;
         String titel;
         String description;
+        String director = null;
+        int fsk = 0;
         String user;
         String password;
         User user1 = null;
@@ -77,6 +79,8 @@ public class Media_disks {
             barcode = obj.getString("barcode");
             titel = obj.getString("titel");
             description = obj.getString("description");
+            director = obj.getString("director");
+            fsk = obj.getInt("fsk");
             user = obj.getString("user");
             password = obj.getString("password");
 
@@ -87,7 +91,7 @@ public class Media_disks {
         }
 
 
-        String result = mAdm.createDisc(barcode, titel, description, dummy);
+        String result = mAdm.createDisc(barcode, titel, director, fsk, description, dummy);
         return Response
                 .status(200)
                 .entity(result)
@@ -105,12 +109,16 @@ public class Media_disks {
         String user = null;
         String password = null;
         User user1 = null;
+        String director = null;
+        int fsk = 0;
 
 
         try {
             barcode = obj.getString("isbn");
             titel = obj.getString("titel");
             description = obj.getString("description");
+            director = obj.getString("director");
+            fsk = obj.getInt("fsk");
             user = obj.getString("user");
             password = obj.getString("password");
 
@@ -118,7 +126,7 @@ public class Media_disks {
         }
 
 
-        String result = mAdm.editDisc(barcode, titel, description, dummy);
+        String result = mAdm.editDisc(barcode, titel, director, fsk, description, dummy);
         return Response
                 .status(200)
                 .entity(result)
