@@ -252,7 +252,7 @@ public class MediumAdministartion implements MediaAdminAccess {
                     }
                 }
             } else {
-                return "no Book found";
+                return "no Disc found";
             }
         }
         return "OK";
