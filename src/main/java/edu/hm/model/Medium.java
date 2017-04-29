@@ -26,11 +26,10 @@ public abstract class Medium {
 
     @Override
     public String toString() {
-        return "Medium{" +
-
-                ", titel='" + titel + '\'' +
-                ", description='" + description +
-                '}';
+        return "Medium: {" +
+                "\'titel\':'" + titel + '\'' +
+                ", \'description\':'" + description +
+                "\'}";
     }
 
     @Override
