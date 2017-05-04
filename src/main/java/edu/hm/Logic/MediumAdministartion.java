@@ -74,7 +74,7 @@ public class MediumAdministartion implements MediaAdminAccess {
         if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
                 if (m instanceof Book) {
-                    if (((Book) m).getISBN().equals(isbn)) {
+                    if (((Book) m).getIsbn().equals(isbn)) {
                         result = (Book) m;
                     }
                 }
@@ -89,7 +89,7 @@ public class MediumAdministartion implements MediaAdminAccess {
         if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
                 if (m instanceof Disc) {
-                    if (((Disc) m).getBARCODE().equals(barcode)) {
+                    if (((Disc) m).getBarcode().equals(barcode)) {
                         result = (Disc) m;
                     }
                 }

@@ -13,6 +13,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by Maximilian on 26.04.2017.
  */
+@SuppressWarnings("CheckStyle")
 public class MediumAdministration_Test {
 
 
@@ -42,11 +43,11 @@ public class MediumAdministration_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        assertEquals(testedAdminstration.createDisc("12", "testDisc", "me", 1,"just a test", testUser), "invalid barcode");
-        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1,"just a test", testUser), "OK");
+        assertEquals(testedAdminstration.createDisc("12", "testDisc", "me", 1, "just a test", testUser), "invalid barcode");
+        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testUser), "OK");
         assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testUser), "exists already");
         testUser.setActivated(false);
-        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1,"just a test", testUser), "not Authorized");
+        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testUser), "not Authorized");
     }
 
     public void testAddCopy(){
@@ -66,7 +67,7 @@ public class MediumAdministration_Test {
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
         Book testBook = new Book("9783161484100", "testBook", "me", "just a test");
-        Disc testDisc = new Disc("9783161484100", "testDisc",  "me", 1,"just a test");
+        Disc testDisc = new Disc("9783161484100", "testDisc",  "me", 1, "just a test");
 
         assertNull(testedAdminstration.findMediumByISBN("9783161484100"));
         assertNull(testedAdminstration.findMediumByBarcode("9783161484100"));
@@ -80,7 +81,7 @@ public class MediumAdministration_Test {
         assertTrue(testedAdminstration.getAllDiscs().isEmpty());
 
 
-        testedAdminstration.createBook("9783161484100", "testBook", "me","just a test", testUser);
+        testedAdminstration.createBook("9783161484100", "testBook", "me", "just a test", testUser);
         testedAdminstration.createDisc("9783161484100", "testDisc",  "me", 1, "just a test", testUser);
 
         ArrayList<Medium> testMedia = new ArrayList();
@@ -117,7 +118,7 @@ public class MediumAdministration_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        testedAdminstration.createBook("9783161484100", "testBook", "me","just a test", testUser);
+        testedAdminstration.createBook("9783161484100", "testBook", "me", "just a test", testUser);
         testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testUser);
 
         assertEquals("OK", testedAdminstration.editBook("9783161484100", "nope", "notME", "just a description", testUser));
@@ -125,11 +126,14 @@ public class MediumAdministration_Test {
         assertEquals("no Titel", testedAdminstration.editBook("9783161484100", null, "notME", "just a description", testUser));
         assertEquals("no Author", testedAdminstration.editBook("9783161484100", "what titel", null, "just a description", testUser));
 
-        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "nope",  "me", 1,"just a description", testUser));
+        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "nope",  "me", 1, "just a description", testUser));
         assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 1, null, testUser));
         assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 0, null, testUser));
         assertEquals("no Titel", testedAdminstration.editDisc("9783161484100", null, "me", 1, "just a description", testUser));
         assertEquals("no Director", testedAdminstration.editDisc("9783161484100", "shit", null, 1, "just a description", testUser));
+
+        assertEquals("no Book found", testedAdminstration.editBook("9783161485100", "what", "notME", "just a description", testUser));
+        assertEquals("no Disc found", testedAdminstration.editDisc("9783161485100", "why", "me", 1, "just a description", testUser));
 
     }
 

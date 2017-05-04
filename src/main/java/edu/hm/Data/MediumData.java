@@ -17,7 +17,7 @@ public class MediumData implements MediumDataAccess {
     /**
      * creates a new MediumData ewith an empty MediaList.
      */
-    public MediumData(){
+    public MediumData() {
         mediaList = new ArrayList<>();
         copies = new ArrayList<>();
     }
@@ -26,7 +26,7 @@ public class MediumData implements MediumDataAccess {
      * creates a new MediumData with a pre existing MediaList.
      * @param mediaCatalogue an ArrayList Containing all Mediums the MediumData should know from the start
      */
-    public MediumData(ArrayList<Medium> mediaCatalogue){
+    public MediumData(ArrayList<Medium> mediaCatalogue) {
 
         mediaList = mediaCatalogue;
     }
@@ -37,7 +37,7 @@ public class MediumData implements MediumDataAccess {
         Disc newDisc = new Disc(barcode, titel, director, fsk, description);
         boolean exists = false;
         for (Medium m : mediaList) {
-            if (m.equals(newDisc)){
+            if (m.equals(newDisc)) {
                 exists = true;
             }
         }
@@ -61,11 +61,11 @@ public class MediumData implements MediumDataAccess {
         Book newBook = new Book(isbn, titel, author, description);
         boolean exists = false;
         for (Medium m : mediaList) {
-            if (m.equals(newBook)){
+            if (m.equals(newBook)) {
                 exists = true;
             }
         }
-        if(!exists) {
+        if (!exists) {
             mediaList.add(newBook);
             answer = "OK";
         }
@@ -89,7 +89,8 @@ public class MediumData implements MediumDataAccess {
     public String toString() {
         // please also add a toString on a Medium
         return
-                "mediaList=" + mediaList +
-                '}';
+                "mediaList="
+                        + mediaList
+                        + '}';
     }
 }

@@ -8,45 +8,80 @@ public abstract class Medium {
     private String titel;
     private String description;
 
-    public  Medium(){
+    /**
+     * default ctor.
+     */
+    public  Medium() {
 
     }
-    public Medium(String titel, String description){
+
+    /**
+     * ctor for a medium with titel and description.
+     * @param titel the mediums titel
+     * @param description the mediums description
+     */
+    public Medium(String titel, String description) {
         this.titel = titel;
         this.description = description;
     }
 
-    public String getTitel(){
+    /**
+     * returns the Mediums Titel.
+     * @return a String representing the Mediums titel
+     */
+    public String getTitel() {
         return titel;
     }
 
-    public String getDescription(){
+    /**
+     * returns the Mediums Description.
+     * @return a Strign representign the Mediums description
+     */
+    public String getDescription() {
         return description;
     }
 
     @Override
     public String toString() {
-        return "Medium: {" +
-                "\'titel\':'" + titel + '\'' +
-                ", \'description\':'" + description +
-                "\'}";
+        return "Medium: {"
+                + "\'titel\':'"
+                + titel
+                + '\''
+                + ", \'description\':'"
+                + description
+                + "\'}";
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         boolean isEqual = false;
-        if(other!=null) {
-            if(other instanceof Medium){
+        if (other != null) {
+            if (other instanceof Medium) {
                 isEqual = other.toString().equals(this.toString());
             }
         }
         return isEqual;
     }
 
+    @Override
+    public int hashCode() {
+        int result = getTitel() != null ? getTitel().hashCode() : 0;
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        return result;
+    }
+
+    /**
+     * setter for the title.
+     * @param titel the mediums new title
+     */
     public void setTitel(String titel) {
         this.titel = titel;
     }
 
+    /**
+     * setter for the MEdiums Description.
+     * @param description the medims new Description
+     */
     public void setDescription(String description) {
         this.description = description;
     }

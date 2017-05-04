@@ -11,6 +11,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by Maximilian on 26.04.2017.
  */
+@SuppressWarnings("CheckStyle")
 public class MediumData_Test {
 
     public static void main(String... args){
@@ -24,8 +25,8 @@ public class MediumData_Test {
         MediumData mediumData = new MediumData();
         assertEquals(mediumData.addBook("9783161484100", "testbook", "me", "just a test"), "OK");
         assertEquals(mediumData.addBook("9783161484100", "testbook", "me", "just a test"), "exists already");
-        assertEquals(mediumData.addDisc("9783161484100", "testDisc", "just a test"), "OK");
-        assertEquals(mediumData.addDisc("9783161484100", "testDisc", "just a test"), "exists already");
+        assertEquals(mediumData.addDisc("9783161484100", "testDisc", "test Director", 0, "just a test"), "OK");
+        assertEquals(mediumData.addDisc("9783161484100", "testDisc", "test Director", 0, "just a test"), "exists already");
         Medium original = new Book("9783161484100", "testbook", "me", "just a test");
         User testUser = new User("Username", "Passwort");
         assertTrue(mediumData.addCopy(testUser, original, "here").equals(new Copy(testUser, original, "here")));
@@ -36,10 +37,10 @@ public class MediumData_Test {
 
         MediumData mediumData = new MediumData();
         mediumData.addBook("9783161484100", "testbook", "me", "just a test");
-        mediumData.addDisc("9783161484100", "testDisc", "just a test");
+        mediumData.addDisc("9783161484100", "testDisc", "test Director", 0, "just a test");
         ArrayList<Medium> expectedList = new ArrayList();
         expectedList.add(new Book("9783161484100", "testbook", "me", "just a test"));
-        expectedList.add(new Disc("9783161484100", "testDisc", "just a test"));
+        expectedList.add(new Disc("9783161484100", "testDisc", "test Director", 0, "just a test"));
         assertEquals(mediumData.getMediaList(), expectedList);
         assertTrue(mediumData.getCopyList().isEmpty());
         mediumData.addCopy(new User("Username", "Passwort"), expectedList.get(0), "none");
