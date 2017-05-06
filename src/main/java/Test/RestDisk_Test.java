@@ -6,14 +6,13 @@ import edu.hm.REST.MediaDisks;
 import edu.hm.model.User;
 
 import javax.ws.rs.core.Response;
-
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by Maximilian on 26.04.2017.
  */
+
+@SuppressWarnings("CheckStyle")
 public class RestDisk_Test {
 
 
