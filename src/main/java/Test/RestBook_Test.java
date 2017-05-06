@@ -2,14 +2,10 @@ package Test;
 
 import edu.hm.Data.MediumData;
 import edu.hm.Logic.MediumAdministartion;
-import edu.hm.REST.Media_books;
-import edu.hm.model.Book;
-import edu.hm.model.Disc;
-import edu.hm.model.Medium;
+import edu.hm.REST.MediaBooks;
 import edu.hm.model.User;
 
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -36,7 +32,7 @@ public class RestBook_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_books booksTest = new Media_books();
+        MediaBooks booksTest = new MediaBooks();
         booksTest.setAccess(testedAdminstration, testUser);
 
         Response ok = Response.status(200).entity("OK").build();
@@ -57,7 +53,7 @@ public class RestBook_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_books booksTest = new Media_books();
+        MediaBooks booksTest = new MediaBooks();
         booksTest.createBook("{'isbn': '9788373191723', 'titel' : 'HdR', 'description' : 'HdR', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
 
         String currentbooks = "[Medium: {'titel':'test', 'description':'test desc'}, Medium: {'titel':'HdR', 'description':'HdR'}]";
@@ -70,7 +66,7 @@ public class RestBook_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_books booksTest = new Media_books();
+        MediaBooks booksTest = new MediaBooks();
 
         String book = "Medium: {'titel':'HdR', 'description':'HdR'}";
         String got = booksTest.getBookByISBN("9788373191723").getEntity().toString();
@@ -86,7 +82,7 @@ public class RestBook_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_books booksTest = new Media_books();
+        MediaBooks booksTest = new MediaBooks();
         booksTest.setAccess(testedAdminstration, testUser);
 
         Response ok = Response.status(200).entity("OK").build();

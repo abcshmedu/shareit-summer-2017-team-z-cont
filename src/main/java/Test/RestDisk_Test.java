@@ -2,15 +2,10 @@ package Test;
 
 import edu.hm.Data.MediumData;
 import edu.hm.Logic.MediumAdministartion;
-import edu.hm.REST.Media_books;
-import edu.hm.REST.Media_disks;
-import edu.hm.model.Book;
-import edu.hm.model.Disc;
-import edu.hm.model.Medium;
+import edu.hm.REST.MediaDisks;
 import edu.hm.model.User;
 
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -37,7 +32,7 @@ public class RestDisk_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_disks discsTest = new Media_disks();
+        MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
 
 
@@ -63,7 +58,7 @@ public class RestDisk_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_disks discsTest = new Media_disks();
+        MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
 
         discsTest.createDisc("{'barcode': '9783161484100', 'titel' : 'test', 'director' : 'testdirector', 'fsk': '6', 'description' : 'test desc', 'user':'testuser', 'password':'testpw'}");
@@ -80,7 +75,7 @@ public class RestDisk_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_disks discsTest = new Media_disks();
+        MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
 
         String currentDisc = "Medium: {'titel':'LOTR', 'description':'LotR triology'}";
@@ -100,7 +95,7 @@ public class RestDisk_Test {
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData);
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
-        Media_disks discsTest = new Media_disks();
+        MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
 
 

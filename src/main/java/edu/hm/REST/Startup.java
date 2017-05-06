@@ -22,8 +22,8 @@ public class Startup implements ServletContextListener {
         User dummy = new User("dummy", "dummy");
         dummy.setActivated(true);
 
-        Media_books.setAccess(mediumadmin, dummy);
-        Media_disks.setAccess(mediumadmin, dummy);
+        MediaBooks.setAccess(mediumadmin, dummy);
+        MediaDisks.setAccess(mediumadmin, dummy);
 
     }
 }

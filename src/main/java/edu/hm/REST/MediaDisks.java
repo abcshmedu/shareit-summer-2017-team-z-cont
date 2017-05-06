@@ -1,14 +1,9 @@
 package edu.hm.REST;
 
-import javax.validation.constraints.Null;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import edu.hm.Logic.MediumAdministartion;
-import edu.hm.model.Book;
 import edu.hm.model.Disc;
 import edu.hm.model.User;
-
-import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,9 +12,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-// The Java class will be hosted at the URI path "/helloworld"
+/** The Java class will be hosted at the URI path "/helloworld".
+ *
+ */
 @Path("/media/discs")
-public class Media_disks {
+public class MediaDisks {
 
 
     /**
@@ -27,6 +24,8 @@ public class Media_disks {
      */
     private static MediaAdminAccess mAdm;
     private static User dummy;
+    private static final int STATUS200 = 200;
+    private static final int STATUS400 = 400;
 
 
     /**
@@ -38,14 +37,14 @@ public class Media_disks {
     public Response getAllDiscs() {
         ArrayList<Disc> retlist = new ArrayList<>();
         retlist = mAdm.getAllDiscs();
-        if(retlist != null) {
+        if (retlist != null) {
             return Response
-                    .status(200)
+                    .status(STATUS200)
                     .entity(retlist.toString())
                     .build();
-        }else {
+        } else {
             return Response
-                    .status(400)
+                    .status(STATUS400)
                     .entity("no disc found")
                     .build();
         }
@@ -58,26 +57,31 @@ public class Media_disks {
      */
     @GET
     @Path("{p}")
-    public Response getDiscByBarcode(@PathParam("p") String barcode){
+    public Response getDiscByBarcode(@PathParam("p") String barcode) {
         Disc result;
         result = mAdm.findMediumByBarcode(barcode);
-        if(result != null) {
+        if (result != null) {
             return Response
-                    .status(200)
+                    .status(STATUS200)
                     .entity(result.toString())
                     .build();
-        }else {
+        } else {
             return Response
-                    .status(400)
+                    .status(STATUS400)
                     .entity("no disc found")
                     .build();
         }
 
     }
 
+    /**
+     * creates a new Disc.
+     * @param dataMsg the new Discs data
+     * @return a response
+     */
     @POST
     @Consumes("application/json")
-    public Response createDisc(final String dataMsg){
+    public Response createDisc(final String dataMsg) {
 
         JSONObject obj = new JSONObject(dataMsg);
         String barcode;
@@ -99,7 +103,7 @@ public class Media_disks {
             password = obj.getString("password");
 
         } catch (JSONException e) {
-            return Response.status(400)
+            return Response.status(STATUS400)
                     .entity("your json is invalid")
                     .build();
         }
@@ -107,14 +111,19 @@ public class Media_disks {
 
         String result = mAdm.createDisc(barcode, titel, director, fsk, description, dummy);
         return Response
-                .status(200)
+                .status(STATUS200)
                 .entity(result)
                 .build();
     }
 
+    /**
+     * upadtes a discs data.
+     * @param dataMsg the new data
+     * @return a response
+     */
     @PUT
     @Consumes("application/json")
-    public Response updateDisc(final String dataMsg){
+    public Response updateDisc(final String dataMsg) {
         JSONObject obj = new JSONObject(dataMsg);
 
         String barcode = null;
@@ -142,7 +151,7 @@ public class Media_disks {
 
         String result = mAdm.editDisc(barcode, titel, director, fsk, description, dummy);
         return Response
-                .status(200)
+                .status(STATUS200)
                 .entity(result)
                 .build();
 
@@ -150,6 +159,11 @@ public class Media_disks {
 
 
 
+    /**
+     * sets the MediaAcces interface this class uses.
+     * @param mediaAccess the interface impelmentation to be used
+     * @param user a dummy user inplace of a working user service
+     */
     public static void setAccess(MediaAdminAccess mediaAccess, User user) {
         mAdm = mediaAccess;
         dummy = user;
