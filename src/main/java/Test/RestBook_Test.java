@@ -40,11 +40,11 @@ public class RestBook_Test {
         Response isbnExists = Response.status(200).entity("exists allready").build();
 
 
-        Response got = booksTest.createBook("{'isbn': '9783161484100', 'titel' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        Response got = booksTest.createBook("{'isbn': '9783161484100', 'title' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(ok.toString()));
-        got = booksTest.createBook("{'titel' : 'test', 'description' : 'testdesc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        got = booksTest.createBook("{'title' : 'test', 'description' : 'testdesc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(invJson.toString()));
-        got = booksTest.createBook("{'isbn': '9783161484100', 'titel' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        got = booksTest.createBook("{'isbn': '9783161484100', 'title' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(isbnExists.toString()));
     }
 
@@ -54,9 +54,9 @@ public class RestBook_Test {
         User testUser = new User("Username", "Passwort");
         testUser.setActivated(true);
         MediaBooks booksTest = new MediaBooks();
-        booksTest.createBook("{'isbn': '9788373191723', 'titel' : 'HdR', 'description' : 'HdR', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        booksTest.createBook("{'isbn': '9788373191723', 'title' : 'HdR', 'description' : 'HdR', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
 
-        String currentbooks = "[Medium: {'titel':'test', 'description':'test desc'}, Medium: {'titel':'HdR', 'description':'HdR'}]";
+        String currentbooks = "[Medium: {'title':'test', 'description':'test desc'}, Medium: {'title':'HdR', 'description':'HdR'}]";
         String got = booksTest.getAllBooks().getEntity().toString();
         assertTrue(got.equals(currentbooks));
     }
@@ -68,7 +68,7 @@ public class RestBook_Test {
         testUser.setActivated(true);
         MediaBooks booksTest = new MediaBooks();
 
-        String book = "Medium: {'titel':'HdR', 'description':'HdR'}";
+        String book = "Medium: {'title':'HdR', 'description':'HdR'}";
         String got = booksTest.getBookByISBN("9788373191723").getEntity().toString();
         assertTrue(got.equals(book));
 
@@ -88,11 +88,11 @@ public class RestBook_Test {
         Response ok = Response.status(200).entity("OK").build();
         Response invJson = Response.status(200).entity("your json is invalid").build();
         Response isbnExists = Response.status(200).entity("exists allready").build();
-        Response got = booksTest.updateBook("{'isbn': '9783161484100', 'titel' : 'test-modify', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        Response got = booksTest.updateBook("{'isbn': '9783161484100', 'title' : 'test-modify', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(ok.toString()));
-        got = booksTest.updateBook("{'titel' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        got = booksTest.updateBook("{'title' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(invJson.toString()));
-        got = booksTest.updateBook("{'isbn': '978316148412200', 'titel' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
+        got = booksTest.updateBook("{'isbn': '978316148412200', 'title' : 'test', 'description' : 'test desc', 'author' : 'testauth', 'user':'testuser', 'password':'testpw'}");
         assertTrue(got.toString().equals(ok.toString()));
 
     }
