@@ -95,7 +95,7 @@ public class MediaDisks {
 
         try {
             barcode = obj.getString("barcode");
-            titel = obj.getString("titel");
+            titel = obj.getString("title");
             description = obj.getString("description");
             director = obj.getString("director");
             fsk = obj.getInt("fsk");
@@ -138,7 +138,7 @@ public class MediaDisks {
 
         try {
             barcode = obj.getString("barcode");
-            titel = obj.getString("titel");
+            titel = obj.getString("title");
             description = obj.getString("description");
             director = obj.getString("director");
             fsk = obj.getInt("fsk");

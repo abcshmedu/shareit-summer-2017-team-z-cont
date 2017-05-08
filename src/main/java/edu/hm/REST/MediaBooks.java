@@ -93,7 +93,7 @@ public class MediaBooks {
 
         try {
             isbn = obj.getString("isbn");
-            titel = obj.getString("titel");
+            titel = obj.getString("title");
             description = obj.getString("description");
             author = obj.getString("author");
 
@@ -135,7 +135,7 @@ public class MediaBooks {
 
         try {
             isbn = obj.getString("isbn");
-            titel = obj.getString("titel");
+            titel = obj.getString("title");
             author = obj.getString("author");
             description = obj.getString("description");
             user = obj.getString("user");

@@ -26,6 +26,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     @Override
     public String createBook(String isbn, String titel, String author, String description, User curUser) {
+        isbn = isbn.replaceAll("-", "");
         String result = "something went wrong";
         if (checkValidISBN(isbn)) {
             if (checkUserOK(curUser)) {
@@ -42,6 +43,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     @Override
     public String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
+        barcode = barcode.replaceAll("-", "");
         String result = "something went wrong";
         if (checkValidBarcode(barcode)) {
             if (checkUserOK(curUser)) {
@@ -70,6 +72,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
   @Override
     public Book findMediumByISBN(String isbn) {
+      isbn = isbn.replaceAll("-", "");
         Book result = null;
         if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
@@ -85,6 +88,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     @Override
     public Disc findMediumByBarcode(String barcode) {
+        barcode = barcode.replaceAll("-", "");
         Disc result = null;
         if (mdata.getMediaList().size() > 0) {
             for (Medium m: mdata.getMediaList()) {
@@ -211,6 +215,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     @Override
     public String editBook(String isbn, String titel, String author, String description, User curUser) {
+        isbn = isbn.replaceAll("-", "");
         if (checkUserOK(curUser)) {
             Book toBeEdited = findMediumByISBN(isbn);
             if (toBeEdited != null) {
@@ -235,6 +240,7 @@ public class MediumAdministartion implements MediaAdminAccess {
 
     @Override
     public String editDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
+        barcode = barcode.replaceAll("-", "");
         if (checkUserOK(curUser)) {
             Disc toBeEdited = findMediumByBarcode(barcode);
             if (toBeEdited != null) {
