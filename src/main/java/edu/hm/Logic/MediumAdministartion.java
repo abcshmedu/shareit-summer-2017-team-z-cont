@@ -296,6 +296,7 @@ public class MediumAdministartion implements MediaAdminAccess {
         int sum = 0;
         int digits = 0;
         int multiplier = 1;
+        str.replaceAll("-", "");
         for (int i = 0; i < str.length() && digits < ISBN_LENGTH - 1; i++) {
             char c = str.charAt(i);
             if ('0' <= c && c <= '9') {
