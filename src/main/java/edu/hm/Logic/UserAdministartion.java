@@ -3,18 +3,23 @@ package edu.hm.Logic;
 import edu.hm.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Maximilian on 21.04.2017.
  */
 public class UserAdministartion {
 
+    private static final long TOKEN_TIMEOUT = 60000;
+    private static final int TOKEN_GEN_SEED = 300;
     private UserDataAccess userDataAccess;
     private User currrentUser;
-
+    private Map<String, Long> validTokens;
     public UserAdministartion(UserDataAccess dataAccess){
         userDataAccess = dataAccess;
-        createAdmin("AdminOne","Admin");
+        createAdmin("AdminOne", "Admin");
     }
 
     public User createUser(String username, String password){
@@ -34,13 +39,13 @@ public class UserAdministartion {
         newUser.setActivated(true);
     }
 
-    public boolean logIn(String username, String password){
-        boolean worked = false;
+    public String logIn(String username, String password){
+        String worked = "false";
         if(currrentUser == null) {
             User userLoggingIn = userDataAccess.findUserByUsername(username);
-            if (userLoggingIn.isActivated()&&userLoggingIn.getPassword().equals(password)) {
+            if (userLoggingIn.isActivated() && userLoggingIn.getPassword().equals(password)) {
                 currrentUser = userLoggingIn;
-                worked = true;
+                worked = generateToken();
             }
         }
         return worked;
@@ -107,8 +112,25 @@ public class UserAdministartion {
         }
     }
 
-    User getCurrentUser(){
-        return currrentUser;
+
+    private String generateToken(){
+        String newToken =  new Random().nextInt(TOKEN_GEN_SEED) + "userToken" + System.currentTimeMillis();
+        validTokens.put(newToken, System.currentTimeMillis());
+        return newToken;
+    }
+
+    public boolean checkToken(String token){
+        boolean isValid = false;
+        if (validTokens.containsKey(token)){
+            if (System.currentTimeMillis() - validTokens.get(token) < TOKEN_TIMEOUT){
+                isValid = true;
+                validTokens.replace(token, System.currentTimeMillis());
+            } else {
+                validTokens.remove(token);
+            }
+        }
+
+        return isValid;
     }
 
     /**
