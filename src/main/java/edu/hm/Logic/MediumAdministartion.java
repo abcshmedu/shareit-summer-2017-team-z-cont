@@ -16,18 +16,23 @@ public class MediumAdministartion implements MediaAdminAccess {
      */
     private MediumDataAccess mdata;
 
+    private UserAdministartion userValidation;
+
     /**
      * c-tor with a given data-Layer access.
      * @param dataAccess the DataLayer Object that will be used through the interface Medium DataAccess.
+     * @param authorization the UserAdministration used to validate incoming usertokens
      */
-    public MediumAdministartion(MediumDataAccess dataAccess) {
+    public MediumAdministartion(MediumDataAccess dataAccess, UserAdministartion authorization) {
         mdata = dataAccess;
+        userValidation = authorization;
     }
 
     @Override
-    public String createBook(String isbn, String titel, String author, String description, User curUser) {
+    public String createBook(String isbn, String titel, String author, String description, String token) {
         isbn = isbn.replaceAll("-", "");
         String result = "something went wrong";
+        User curUser = userValidation.getUserForToken(token);
         if (checkValidISBN(isbn)) {
             if (checkUserOK(curUser)) {
             result = mdata.addBook(isbn, titel, author, description);
@@ -42,9 +47,10 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
     @Override
-    public String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
+    public String createDisc(String barcode, String titel, String director, int fsk, String description, String token) {
         barcode = barcode.replaceAll("-", "");
         String result = "something went wrong";
+        User curUser = userValidation.getUserForToken(token);
         if (checkValidBarcode(barcode)) {
             if (checkUserOK(curUser)) {
             result = mdata.addDisc(barcode, titel, director, fsk, description);
@@ -59,8 +65,9 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
     @Override
-    public String createCopy(User curUser, Medium medium, String location) {
+    public String createCopy(String token, Medium medium, String location) {
         String result = "something went wrong";
+        User curUser = userValidation.getUserForToken(token);
             if (checkUserOK(curUser)) {
                 mdata.addCopy(curUser, medium, location);
                 result = "OK";
@@ -214,8 +221,9 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
     @Override
-    public String editBook(String isbn, String titel, String author, String description, User curUser) {
+    public String editBook(String isbn, String titel, String author, String description, String token) {
         isbn = isbn.replaceAll("-", "");
+        User curUser = userValidation.getUserForToken(token);
         if (checkUserOK(curUser)) {
             Book toBeEdited = findMediumByISBN(isbn);
             if (toBeEdited != null) {
@@ -239,8 +247,9 @@ public class MediumAdministartion implements MediaAdminAccess {
     }
 
     @Override
-    public String editDisc(String barcode, String titel, String director, int fsk, String description, User curUser) {
+    public String editDisc(String barcode, String titel, String director, int fsk, String description, String token) {
         barcode = barcode.replaceAll("-", "");
+        User curUser = userValidation.getUserForToken(token);
         if (checkUserOK(curUser)) {
             Disc toBeEdited = findMediumByBarcode(barcode);
             if (toBeEdited != null) {

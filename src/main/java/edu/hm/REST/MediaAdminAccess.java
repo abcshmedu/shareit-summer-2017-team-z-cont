@@ -16,10 +16,10 @@ public interface MediaAdminAccess {
      * @param titel the books titel
      * @param author the books author
      * @param description a short description
-     * @param curUser the current User creating the book
+     * @param token the validation token of the user
      * @return a String containing a response either OK or a short error message
      */
-    String createBook(String isbn, String titel, String author, String description, User curUser);
+    String createBook(String isbn, String titel, String author, String description, String token);
 
     /**
      * Create a new Disc.
@@ -28,19 +28,19 @@ public interface MediaAdminAccess {
      * @param director the Contents director
      * @param fsk the fsk for the discs contents
      * @param description a short description
-     * @param curUser the current User creating the Disc
+     * @param token the validation token of the user
      * @return a String containing a response either OK or a short error message
      */
-    String createDisc(String barcode, String titel, String director, int fsk, String description, User curUser);
+    String createDisc(String barcode, String titel, String director, int fsk, String description, String token);
 
     /**
      * Creates a copy of a medium.
-     * @param curUser the current User adding a copy he owns
+     * @param token the validation token of the user
      * @param medium the Medium the copy is of
      * @param location where the Copy can be collected
      * @return a String contaaining a response either OK or a short error message
      */
-    String createCopy(User curUser, Medium medium, String location);
+    String createCopy(String token, Medium medium, String location);
 
     /**
      * edit the Data of a book.
@@ -48,10 +48,10 @@ public interface MediaAdminAccess {
      * @param titel the new Titel or the old one if it shouldn't change
      * @param author the new Author of the book, or the old one if it shouldn't change
      * @param description the new discription, set null for no change
-     * @param curUser the current User wanting to edit the data
+     * @param token the validation token of the user
      * @return a String contaaining a response either OK or a short error message
      */
-    String editBook(String isbn, String titel, String author, String description, User curUser);
+    String editBook(String isbn, String titel, String author, String description, String token);
 
     /**
      * edit the Data of a Disc.
@@ -60,10 +60,10 @@ public interface MediaAdminAccess {
      * @param director the new Director of the disc, enter old director for no change
      * @param fsk the new fsk of the disc, enter old one for no change
      * @param description the new desription of the disc, enter null for no change
-     * @param curUser the current User editing the data
+     * @param token the validation token of the user
      * @return a String contaaining a response either OK or a short error message
      */
-    String editDisc(String barcode, String titel, String director, int fsk, String description, User curUser);
+    String editDisc(String barcode, String titel, String director, int fsk, String description, String token);
 
     /**
      * finds a book by its unique isbn.
@@ -115,7 +115,7 @@ public interface MediaAdminAccess {
     /**
      * returns all Mediums that contain the given String in their Description.
      * @param desc a String that is part of the wanted Mediums description
-     * @return
+     * @return a List of Mediums
      */
     ArrayList<Medium> findMediumByDescribtion(String desc);
 
