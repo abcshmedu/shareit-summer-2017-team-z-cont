@@ -92,6 +92,7 @@ public class MediaDisks {
         String user;
         String password;
         User user1 = null;
+        String token = null;
 
         try {
             barcode = obj.getString("barcode");
@@ -101,6 +102,7 @@ public class MediaDisks {
             fsk = obj.getInt("fsk");
             user = obj.getString("user");
             password = obj.getString("password");
+            token = obj.getString("token");
 
         } catch (JSONException e) {
             return Response.status(STATUS400)
@@ -109,7 +111,7 @@ public class MediaDisks {
         }
 
 
-        String result = mAdm.createDisc(barcode, titel, director, fsk, description, dummy);
+        String result = mAdm.createDisc(barcode, titel, director, fsk, description, token);
         return Response
                 .status(STATUS200)
                 .entity(result)
@@ -133,6 +135,7 @@ public class MediaDisks {
         String password = null;
         User user1 = null;
         String director = null;
+        String token = null;
         int fsk = 0;
 
 
@@ -144,12 +147,13 @@ public class MediaDisks {
             fsk = obj.getInt("fsk");
             user = obj.getString("user");
             password = obj.getString("password");
+            token = obj.getString("token");
 
         } catch (JSONException e) {
         }
 
 
-        String result = mAdm.editDisc(barcode, titel, director, fsk, description, dummy);
+        String result = mAdm.editDisc(barcode, titel, director, fsk, description, token);
         return Response
                 .status(STATUS200)
                 .entity(result)

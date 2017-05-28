@@ -86,7 +86,7 @@ public class MediaBooks {
         String titel;
         String description;
         String author;
-
+        String token;
         String user;
         String password;
         User user1 = null;
@@ -96,9 +96,9 @@ public class MediaBooks {
             titel = obj.getString("title");
             description = obj.getString("description");
             author = obj.getString("author");
-
             user = obj.getString("user");
             password = obj.getString("password");
+            token = obj.getString("token");
             } catch (JSONException e) {
             return Response.status(STATUS400)
                     .entity("your json is invalid")
@@ -106,7 +106,7 @@ public class MediaBooks {
         }
 
 
-        String result = mAdm.createBook(isbn, titel, "me", description, dummy);
+        String result = mAdm.createBook(isbn, titel, "me", description, token);
 
         return Response
                 .status(STATUS200)
@@ -131,6 +131,7 @@ public class MediaBooks {
         String user = null;
         String password = null;
         User user1 = null;
+        String token = null;
 
 
         try {
@@ -140,12 +141,14 @@ public class MediaBooks {
             description = obj.getString("description");
             user = obj.getString("user");
             password = obj.getString("password");
+            token = obj.getString("token");
+
         } catch (JSONException e) {
 
         }
 
 
-        String result = mAdm.editBook(isbn, titel, author, description, dummy);
+        String result = mAdm.editBook(isbn, titel, author, description, token);
 
         return Response
                 .status(STATUS200)
