@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Maximilian on 28.05.2017.
  */
-@Path("/userapi")
-public class UserAPI {
+@Path("/logout")
+public class Logout {
 
 
     /**
@@ -20,38 +20,38 @@ public class UserAPI {
     private static final int STATUS200 = 200;
     private static final int STATUS400 = 400;
 
+
     /**
-     * activates a User.
-     * @param dataMsg the new users data
+     * logs a User out.
+     *
+     * @param dataMsg the new Discs data
      * @return a response
      */
     @POST
     @Consumes("application/json")
-    public Response activateUser(final String dataMsg) {
+    public Response logout(final String dataMsg) {
+
         JSONObject obj = new JSONObject(dataMsg);
-        String user = null;
+        String user;
         String token = null;
-        String result = null;
+
         try {
             user = obj.getString("user");
             token = obj.getString("token");
 
         } catch (JSONException e) {
+            return Response.status(STATUS400)
+                    .entity("wrong credentials")
+                    .build();
         }
 
-        if (uAdm.activateUser(user, token)) {
-            result = "user activated";
-        } else {
-            result = "insuficient permission";
-        }
+        uAdm.logOut(token);
+        String result = "loggedout";
         return Response
                 .status(STATUS200)
                 .entity(result)
                 .build();
-
     }
-
-
     /**
      * sets the UserAcces interface this class uses.
      * @param userAccess the interface impelmentation to be used
@@ -59,5 +59,4 @@ public class UserAPI {
     public static void setAccess(UserAdminAccess userAccess) {
         uAdm = userAccess;
     }
-
 }

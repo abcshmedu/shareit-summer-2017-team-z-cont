@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Maximilian on 28.05.2017.
  */
-@Path("/userapi")
-public class UserAPI {
+@Path("/createUser")
+public class CreateUser {
 
 
     /**
@@ -20,38 +20,35 @@ public class UserAPI {
     private static final int STATUS200 = 200;
     private static final int STATUS400 = 400;
 
+
+
     /**
-     * activates a User.
+     * creates a new User.
      * @param dataMsg the new users data
      * @return a response
      */
     @POST
     @Consumes("application/json")
-    public Response activateUser(final String dataMsg) {
+    public Response createUser(final String dataMsg) {
         JSONObject obj = new JSONObject(dataMsg);
         String user = null;
-        String token = null;
-        String result = null;
+        String password = null;
+
         try {
             user = obj.getString("user");
-            token = obj.getString("token");
+            password = obj.getString("password");
 
         } catch (JSONException e) {
         }
 
-        if (uAdm.activateUser(user, token)) {
-            result = "user activated";
-        } else {
-            result = "insuficient permission";
-        }
+
+        String result = uAdm.createUser(user, password).toString();
         return Response
                 .status(STATUS200)
                 .entity(result)
                 .build();
 
     }
-
-
     /**
      * sets the UserAcces interface this class uses.
      * @param userAccess the interface impelmentation to be used
@@ -59,5 +56,4 @@ public class UserAPI {
     public static void setAccess(UserAdminAccess userAccess) {
         uAdm = userAccess;
     }
-
 }

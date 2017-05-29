@@ -4,6 +4,7 @@ import edu.hm.REST.UserAdminAccess;
 import edu.hm.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -15,8 +16,8 @@ public class UserAdministartion implements UserAdminAccess {
     private static final long TOKEN_TIMEOUT = 60000;
     private static final int TOKEN_GEN_SEED = 300;
     private UserDataAccess userDataAccess;
-    private Map<String, Long> validTokens;
-    private Map<String, User> tokensToUser;
+    private Map<String, Long> validTokens = new HashMap<>();
+    private Map<String, User> tokensToUser = new HashMap<>();
 
 
     /**

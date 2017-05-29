@@ -2,6 +2,9 @@ package edu.hm;
 
 import edu.hm.Data.UserData;
 import edu.hm.Logic.UserAdministartion;
+import edu.hm.REST.Login;
+import edu.hm.REST.Logout;
+import edu.hm.REST.UserAPI;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.webapp.*;
 import edu.hm.Data.MediumData;
@@ -28,6 +31,9 @@ public class JettyStarter {
         MediumData mdata = new MediumData();
         UserData userData = new UserData();
         UserAdministartion userAdministartion = new UserAdministartion(userData);
+        Login.setAccess(userAdministartion);
+        Logout.setAccess(userAdministartion);
+        UserAPI.setAccess(userAdministartion);
         MediumAdministartion mAdm = new MediumAdministartion(mdata, userAdministartion);
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));

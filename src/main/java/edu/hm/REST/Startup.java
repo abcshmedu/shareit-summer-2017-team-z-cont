@@ -30,7 +30,12 @@ public class Startup implements ServletContextListener {
 
         MediaBooks.setAccess(mediumadmin, dummy);
         MediaDisks.setAccess(mediumadmin, dummy);
+        CreateUser.setAccess(userAdministartion);
+        Login.setAccess(userAdministartion);
+        Logout.setAccess(userAdministartion);
         UserAPI.setAccess(userAdministartion);
+
+
 
     }
 }
