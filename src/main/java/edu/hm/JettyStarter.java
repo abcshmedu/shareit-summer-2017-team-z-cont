@@ -1,5 +1,7 @@
 package edu.hm;
 
+import edu.hm.Data.UserData;
+import edu.hm.Logic.UserAdministartion;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.webapp.*;
 import edu.hm.Data.MediumData;
@@ -24,7 +26,9 @@ public class JettyStarter {
     public static void main(String... args) throws Exception {
 
         MediumData mdata = new MediumData();
-        MediumAdministartion mAdm = new MediumAdministartion(mdata);
+        UserData userData = new UserData();
+        UserAdministartion userAdministartion = new UserAdministartion(userData);
+        MediumAdministartion mAdm = new MediumAdministartion(mdata, userAdministartion);
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();
