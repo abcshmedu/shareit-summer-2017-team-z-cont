@@ -34,11 +34,11 @@ public class MediumAdministartion implements MediaAdminAccess {
         String result = "something went wrong";
         User curUser = userValidation.getUserForToken(token);
         if (checkValidISBN(isbn)) {
-            if (checkUserOK(curUser)) {
+            if (curUser != null && checkUserOK(curUser)) {
             result = mdata.addBook(isbn, titel, author, description);
-        } else {
-                result = "not Authorized";
-            }
+                } else {
+                    result = "not Authorized";
+                }
         }
         else {
             result = "invalid isbn";

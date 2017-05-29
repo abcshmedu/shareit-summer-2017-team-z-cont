@@ -1,0 +1,11 @@
+  501  curl http://localhost:8080/shareit/api/v1/media/books
+  502  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOne", "password":"Admin"}' http://localhost:8080/shareit/api/v1/login
+  503  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOneTwo", "password":"Admin"}' http://localhost:8080/shareit/api/v1/createUser
+  504  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOneTwo", "token":"259userToken1496054066521"}' http://localhost:8080/shareit/api/v1/userapi
+  505  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOne", "password":"Admin"}' http://localhost:8080/shareit/api/v1/login
+  506  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOneTwo", "token":"293userToken1496054156255"}' http://localhost:8080/shareit/api/v1/userapi
+  507  curl -H "Content-Type: application/json" -X POST -d  '{"isbn": "9783161484100", "title": "test", "description" : "test desc", "author" : "testauth", "user":"AdminOneThree", "password":"Admin", "token": "token"}' http://localhost:8080/shareit/api/v1/media/books
+  508  curl -H "Content-Type: application/json" -X POST -d '{"user":"AdminOneTwo", "password":"Admin"}' http://localhost:8080/shareit/api/v1/login
+  509  curl -H "Content-Type: application/json" -X POST -d  '{"isbn": "9783161484100", "title": "test", "description" : "test desc", "author" : "testauth", "user":"AdminOneThree", "password":"Admin", "token": "194userToken1496054200021"}' http://localhost:8080/shareit/api/v1/media/books
+  510  curl http://localhost:8080/shareit/api/v1/media/books
+
