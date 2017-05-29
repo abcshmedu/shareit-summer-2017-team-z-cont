@@ -8,32 +8,40 @@ import java.util.ArrayList;
 /**
  * Created by Maximilian on 21.04.2017.
  */
-public class UserData implements UserDataAccess{
+public class UserData implements UserDataAccess {
 
 
     private ArrayList<User> userList = new ArrayList<>();
 
-    public UserData () {
+    /**
+     * ctor for a new UserData Object.
+     */
+    public UserData() {
         //userList = new ArrayList<>();
     }
 
-    public UserData(ArrayList<User> oldUsers){
-        userList=oldUsers;
+    /**
+     * ctor for a UserData with existing users.
+     * @param oldUsers an array list of persistent users
+     */
+    public UserData(ArrayList<User> oldUsers) {
+
+        userList = oldUsers;
     }
 
     @Override
-    public User addUser(String username, String password){
+    public User addUser(String username, String password) {
         User newUser = new User(username, password);
         userList.add(newUser);
         return newUser;
     }
 
     @Override
-    public User findUserByUsername (String username){
+    public User findUserByUsername(String username) {
         User result = null;
-        if(userList.size()>0){
+        if (userList.size() > 0) {
             for (User u: userList) {
-                if(u.getUsername()!=null&&u.getUsername().equals(username)){
+                if (u.getUsername() != null && u.getUsername().equals(username)) {
                     result = u;
                 }
             }
