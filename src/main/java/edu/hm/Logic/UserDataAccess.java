@@ -9,7 +9,24 @@ import java.util.ArrayList;
  */
 public interface UserDataAccess {
 
+    /**
+     * adds a User with the given username and password.
+     * @param username the Username of the new User
+     * @param password the new Users password
+     * @return the new User
+     */
     User addUser(String username, String password);
-    User findUserByUsername (String username);
+
+    /**
+     * finds a User by its username.
+     * @param username the username to be searched
+     * @return the found User
+     */
+    User findUserByUsername(String username);
+
+    /**
+     * returns all Users as an ArrayList.
+     * @return a List of all Users
+     */
     ArrayList<User> getAllUsers();
 }
