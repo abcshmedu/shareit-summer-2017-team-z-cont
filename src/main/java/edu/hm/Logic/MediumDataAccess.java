@@ -51,4 +51,10 @@ public interface MediumDataAccess {
      */
     ArrayList<Copy> getCopyList();
 
+    /**
+     * signals the dataAccess to save all Changes.
+     */
+    void saveChanges();
+
+
 }

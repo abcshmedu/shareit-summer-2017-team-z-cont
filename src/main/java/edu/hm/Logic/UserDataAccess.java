@@ -29,4 +29,9 @@ public interface UserDataAccess {
      * @return a List of all Users
      */
     ArrayList<User> getAllUsers();
+
+    /**
+     * signals the persistence layer to save changes.
+     */
+    void saveChanges();
 }

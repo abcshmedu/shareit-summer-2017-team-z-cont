@@ -41,6 +41,7 @@ public class UserAdministartion implements UserAdminAccess {
         User newUser = userDataAccess.addUser(username, password);
         newUser.setForename(forname);
         newUser.setSurname(surname);
+        userDataAccess.saveChanges();
         return newUser;
     }
 
@@ -53,6 +54,7 @@ public class UserAdministartion implements UserAdminAccess {
         User newUser = userDataAccess.addUser(username, password);
         newUser.setAdmin(true);
         newUser.setActivated(true);
+        userDataAccess.saveChanges();
     }
 
     @Override
@@ -83,6 +85,7 @@ public class UserAdministartion implements UserAdminAccess {
                 worked = true;
             }
         }
+        userDataAccess.saveChanges();
         return worked;
     }
 
@@ -95,6 +98,7 @@ public class UserAdministartion implements UserAdminAccess {
                 worked = true;
             }
         }
+        userDataAccess.saveChanges();
         return worked;
     }
 
@@ -131,6 +135,7 @@ public class UserAdministartion implements UserAdminAccess {
         if (checkToken(token)) {
             tokensToUser.get(token).setForename(forename);
         }
+        userDataAccess.saveChanges();
     }
 
     @Override
@@ -138,6 +143,7 @@ public class UserAdministartion implements UserAdminAccess {
         if (checkToken(token)) {
             tokensToUser.get(token).setSurname(surname);
         }
+        userDataAccess.saveChanges();
     }
 
 

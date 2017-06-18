@@ -246,6 +246,7 @@ public class MediumAdministartion implements MediaAdminAccess {
                 return "no Book found";
             }
         }
+        mdata.saveChanges();
         return "OK";
     }
 
@@ -273,6 +274,7 @@ public class MediumAdministartion implements MediaAdminAccess {
                 return "no Disc found";
             }
         }
+        mdata.saveChanges();
         return "OK";
     }
 
