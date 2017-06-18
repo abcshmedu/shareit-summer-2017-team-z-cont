@@ -1,10 +1,15 @@
 package edu.hm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Maximilian on 21.04.2017.
  */
+@Entity
 public abstract class Medium {
 
+    private String id;
     private String titel;
     private String description;
 
@@ -84,5 +89,22 @@ public abstract class Medium {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * getter for the Hibernate id.
+     * @return the ID
+     */
+    @Id
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * setter for the hibernate id.
+     * @param id the id
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 }

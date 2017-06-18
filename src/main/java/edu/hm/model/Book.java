@@ -1,11 +1,15 @@
 package edu.hm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Markus on 21.04.2017.
  */
+@Entity
 public class Book extends Medium {
 
-    private final String isbn;
+    private String isbn;
     private String author;
 
     /**
@@ -21,15 +25,31 @@ public class Book extends Medium {
         this.author = author;
     }
 
+    /**
+     * default ctor for hibernate.
+     */
+    public Book() {
+    }
+
 
     /**
      * getter for the books isbn.
      * @return the books isbn
      */
+    @Id
     public String getIsbn() {
         return isbn;
     }
 
+    /**
+     * setter for the isbn.
+     * @param isbn the books isbn
+     */
+    public void setIsbn(String isbn) {
+        if (getIsbn() == null) {
+            this.isbn = isbn;
+        }
+    }
     /**
      * getter for the books author.
      * @return the books author

@@ -1,8 +1,12 @@
 package edu.hm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Maximilian on 21.04.2017.
  */
+@Entity
 public class User {
 
 
@@ -23,6 +27,12 @@ public class User {
         this.password = password;
         isAdmin = false;
         isActivated = false;
+    }
+
+    /**
+     * default ctor for hibernate.
+     */
+    public User() {
     }
 
     /**
@@ -69,9 +79,27 @@ public class User {
      * getter for the username.
      * @return the username as a String
      */
+    @Id
     public String getUsername() {
         return username;
     }
+
+    /**
+     * setter for the Username.
+     * @param username new Username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * setter for the password.
+     * @param password the new password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     /**
      * getter for the useres surname.

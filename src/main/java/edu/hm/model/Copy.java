@@ -1,14 +1,20 @@
 package edu.hm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * Created by Maximilian on 26.04.2017.
  */
+@Entity
 public class Copy {
     private Medium medium;
     private User owner;
     private String location;
     private boolean isBorrowed;
     private User borrowedBy;
+    private String id;
 
     /**
      * ctor for new copies.
@@ -22,6 +28,12 @@ public class Copy {
         this.location = location;
         isBorrowed = false;
         borrowedBy = null;
+    }
+
+    /**
+     * default ctor for hibernate.
+     */
+    public Copy() {
     }
 
     /**
@@ -75,6 +87,7 @@ public class Copy {
      * getter for the Copies medium.
      * @return the medium this object represents a copy of
      */
+    @ManyToOne
     public Medium getMedium() {
         return medium;
     }
@@ -91,6 +104,7 @@ public class Copy {
      * getter for the copies owner.
      * @return the User that owns this copy
      */
+    @ManyToOne
     public User getOwner() {
         return owner;
     }
@@ -139,6 +153,7 @@ public class Copy {
      * getter for the user that borrowed this Copy.
      * @return the User that is currently borrowing this copy
      */
+    @ManyToOne
     public User getBorrowedBy() {
         return borrowedBy;
     }
@@ -190,5 +205,24 @@ public class Copy {
         result = 31 * result
                 + (getBorrowedBy() != null ? getBorrowedBy().hashCode() : 0);
         return result;
+    }
+
+
+
+    /**
+     * getter for the hibernate Id.
+     * @return the Id as a String
+     */
+    @Id
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * setter for the hibernate id.
+     * @param id the new id
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -17,8 +17,10 @@
         <property name="hbm2ddl.auto">create</property>
         <property name="transaction.auto_close_session">true</property>
 
-        <mapping class="edu.hm.Data.MediumData" />
-        <mapping class="edu.hm.Data.UserData" />
+        <mapping class="edu.hm.model.Book" />
+        <mapping class="edu.hm.model.Copy" />
+        <mapping class="edu.hm.model.Disc" />
+        <mapping class="edu.hm.model.User" />
 
     </session-factory>
 

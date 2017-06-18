@@ -1,11 +1,15 @@
 package edu.hm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Markus on 21.04.2017.
  */
+@Entity
 public class Disc extends Medium {
 
-    private final String barcode;
+    private String barcode;
     private String director;
     private int fsk;
 
@@ -25,11 +29,26 @@ public class Disc extends Medium {
     }
 
     /**
+     * default ctor for hibernate.
+     */
+    public Disc() {
+    }
+
+    /**
      * getter for the Discs barcode.
      * @return a string containing the discs barcode
      */
+    @Id
     public String getBarcode() {
         return barcode;
+    }
+
+    /**
+     * setter for the barcode for hibernate.
+     * @param barcode the barcode
+     */
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     /**
