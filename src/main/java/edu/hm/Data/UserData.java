@@ -30,7 +30,7 @@ public class UserData implements UserDataAccess {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
         }
-        //updateUserList();
+        updateUserList();
     }
 
 
@@ -63,8 +63,9 @@ public class UserData implements UserDataAccess {
         } finally {
             session.close();
         }
-        updateUserList();
-        //userList.add(newUser);
+        // This will create the User twice
+        //updateUserList();
+        userList.add(newUser);
         return newUser;
     }
 
@@ -80,8 +81,8 @@ public class UserData implements UserDataAccess {
             for (Iterator iterator =
                  tempUserList.iterator(); iterator.hasNext();) {
                 User user = (User) iterator.next();
-                if (!userList.contains(user)) {
-                    userList.add(user);
+                if (!this.userList.contains(user)) {
+                    this.userList.add(user);
                 }
             }
             tx.commit();

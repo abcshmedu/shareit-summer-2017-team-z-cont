@@ -35,9 +35,9 @@ public class MediumData implements MediumDataAccess {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
         }
-        /*updateCopyList();
+        updateCopyList();
         updateBookList();
-        updateCopyList();*/
+        updateCopyList();
     }
 
     /**
@@ -135,7 +135,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-      //  updateBookList();
+        updateBookList();
         return newBook;
     }
 
@@ -187,7 +187,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-       // updateCopyList();
+        updateCopyList();
         return newCopy;
     }
 
@@ -238,7 +238,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-        //updateDiscList();
+        updateDiscList();
         return newDisc;
     }
 
