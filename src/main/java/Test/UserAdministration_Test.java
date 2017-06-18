@@ -3,6 +3,7 @@ package Test;
 import edu.hm.Data.UserData;
 import edu.hm.Logic.UserAdministartion;
 import edu.hm.model.User;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class UserAdministration_Test {
         Tester.testUserEditing();
     }
 
-
+    @Test
     public void testFindUserCreateUser(){
         UserData userData = new UserData();
         UserAdministartion userAdmin = new UserAdministartion(userData);
@@ -35,11 +36,12 @@ public class UserAdministration_Test {
         assertEquals(userAdmin.getAllUsers(), userList);
         userAdmin.createUser("second", "why", "Hans", "Lustig");
         User second = new User("second", "why");
+        userList.add(second);
         second.setForename("Hans");
         second.setSurname("Lustig");
         assertEquals(userAdmin.getAllUsers(), userList);
     }
-
+    @Test
     public void testLoginLogout(){
         UserData userData = new UserData();
         UserAdministartion userAdmin = new UserAdministartion(userData);
@@ -48,7 +50,7 @@ public class UserAdministration_Test {
         userAdmin.logOut(token);
         assertEquals(false, userAdmin.checkToken(token));
     }
-
+    @Test
     public void testMakeAdminActivateUser(){
         UserData userData = new UserData();
         UserAdministartion userAdmin = new UserAdministartion(userData);
@@ -58,7 +60,7 @@ public class UserAdministration_Test {
         assertEquals(true, userAdmin.makeAdmin("tester", token));
         assertEquals(2, userAdmin.getAllAdmins(token).size());
     }
-
+    @Test
     public void testUserEditing(){
         UserData userData = new UserData();
         UserAdministartion userAdmin = new UserAdministartion(userData);

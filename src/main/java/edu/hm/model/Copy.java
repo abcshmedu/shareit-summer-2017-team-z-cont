@@ -1,8 +1,6 @@
 package edu.hm.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by Maximilian on 26.04.2017.
@@ -14,7 +12,7 @@ public class Copy {
     private String location;
     private boolean isBorrowed;
     private User borrowedBy;
-    private String id;
+    private int id;
 
     /**
      * ctor for new copies.
@@ -87,7 +85,7 @@ public class Copy {
      * getter for the Copies medium.
      * @return the medium this object represents a copy of
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     public Medium getMedium() {
         return medium;
     }
@@ -104,7 +102,7 @@ public class Copy {
      * getter for the copies owner.
      * @return the User that owns this copy
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     public User getOwner() {
         return owner;
     }
@@ -153,7 +151,7 @@ public class Copy {
      * getter for the user that borrowed this Copy.
      * @return the User that is currently borrowing this copy
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     public User getBorrowedBy() {
         return borrowedBy;
     }
@@ -183,7 +181,7 @@ public class Copy {
         if (!getMedium().equals(copy.getMedium())) {
             return false;
         }
-        if (!getOwner().equals(copy.getOwner())) {
+        if (!getOwner().getUsername().equals(copy.getOwner().getUsername())) {
             return false;
         }
         if (getLocation() != null ? !getLocation().equals(copy.getLocation()) : copy.getLocation() != null) {
@@ -214,7 +212,8 @@ public class Copy {
      * @return the Id as a String
      */
     @Id
-    public String getId() {
+    @GeneratedValue
+    public int getId() {
         return id;
     }
 
@@ -222,7 +221,7 @@ public class Copy {
      * setter for the hibernate id.
      * @param id the new id
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

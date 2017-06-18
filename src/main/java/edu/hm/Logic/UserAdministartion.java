@@ -39,8 +39,8 @@ public class UserAdministartion implements UserAdminAccess {
     @Override
     public User createUser(String username, String password, String forname, String surname) {
         User newUser = userDataAccess.addUser(username, password);
-        newUser.setForename(forname);
-        newUser.setSurname(surname);
+        userDataAccess.findUserByUsername(username).setForename(forname);
+        userDataAccess.findUserByUsername(username).setSurname(surname);
         userDataAccess.saveChanges();
         return newUser;
     }
@@ -52,8 +52,8 @@ public class UserAdministartion implements UserAdminAccess {
      */
     private void createAdmin(String username, String password) {
         User newUser = userDataAccess.addUser(username, password);
-        newUser.setAdmin(true);
-        newUser.setActivated(true);
+        userDataAccess.findUserByUsername(username).setAdmin(true);
+        userDataAccess.findUserByUsername(username).setActivated(true);
         userDataAccess.saveChanges();
     }
 
@@ -160,7 +160,9 @@ public class UserAdministartion implements UserAdminAccess {
     @Override
     public boolean checkToken(String token) {
         boolean isValid = false;
+        System.out.print(validTokens);
         if (validTokens.containsKey(token)) {
+            System.out.print("\n\n" + validTokens.get(token) + "\n\n");
             if (System.currentTimeMillis() - validTokens.get(token) < TOKEN_TIMEOUT) {
                 isValid = true;
                 validTokens.replace(token, System.currentTimeMillis());

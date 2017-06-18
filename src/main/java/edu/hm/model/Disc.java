@@ -1,7 +1,6 @@
 package edu.hm.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  * Created by Markus on 21.04.2017.
@@ -38,7 +37,6 @@ public class Disc extends Medium {
      * getter for the Discs barcode.
      * @return a string containing the discs barcode
      */
-    @Id
     public String getBarcode() {
         return barcode;
     }

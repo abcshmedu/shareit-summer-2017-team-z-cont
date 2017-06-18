@@ -6,6 +6,7 @@ import edu.hm.Logic.MediumAdministartion;
 import edu.hm.Logic.UserAdministartion;
 import edu.hm.REST.MediaDisks;
 import edu.hm.model.User;
+import org.junit.Test;
 
 import javax.ws.rs.core.Response;
 import static junit.framework.TestCase.assertTrue;
@@ -27,14 +28,15 @@ public class RestDisk_Test {
 
     }
 
-
+    @Test
     public void testAddDisk() {
         UserData userData = new UserData();
         UserAdministartion userAdministartion = new UserAdministartion(userData);
         MediumData mediumData = new MediumData();
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, userAdministartion);
-        User testUser = new User("Username", "Passwort");
-        testUser.setActivated(true);
+        User testUser = userAdministartion.createUser("Username", "Passwort");
+        String adminToken = userAdministartion.logIn("AdminOne", "Admin");
+        userAdministartion.activateUser("Username", adminToken);
         String token = userAdministartion.logIn("Username", "Passwort");
         MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
@@ -56,14 +58,15 @@ public class RestDisk_Test {
         got = discsTest.createDisc("{'barcode': '9783161484100', 'title' : 'test', 'director' : 'testdirector', 'fsk': '6', 'description' : 'test desc', 'user':'testuser', 'password':'testpw', 'token':'"+token+"'}");
         assertTrue(got.toString().equals(barcodeExists.toString()));
     }
-
+    @Test
     public void testGetAllDiscs(){
         UserData userData = new UserData();
         UserAdministartion userAdministartion = new UserAdministartion(userData);
         MediumData mediumData = new MediumData();
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, userAdministartion);
-        User testUser = new User("Username", "Passwort");
-        testUser.setActivated(true);
+        User testUser = userAdministartion.createUser("Username", "Passwort");
+        String adminToken = userAdministartion.logIn("AdminOne", "Admin");
+        userAdministartion.activateUser("Username", adminToken);
         String token = userAdministartion.logIn("Username", "Passwort");
         MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
@@ -76,14 +79,15 @@ public class RestDisk_Test {
 
 
     }
-
+    @Test
     public void testGetDiskByBarcode(){
         UserData userData = new UserData();
         UserAdministartion userAdministartion = new UserAdministartion(userData);
         MediumData mediumData = new MediumData();
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, userAdministartion);
-        User testUser = new User("Username", "Passwort");
-        testUser.setActivated(true);
+        User testUser = userAdministartion.createUser("Username", "Passwort");
+        String adminToken = userAdministartion.logIn("AdminOne", "Admin");
+        userAdministartion.activateUser("Username", adminToken);
         String token = userAdministartion.logIn("Username", "Passwort");
         MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);
@@ -99,14 +103,15 @@ public class RestDisk_Test {
         got = discsTest.getDiscByBarcode("5051890045189");
         assertTrue(got.getEntity().toString().equals(noDiscFound));
     }
-
+    @Test
     public void testUpdateDisk() {
         UserData userData = new UserData();
         UserAdministartion userAdministartion = new UserAdministartion(userData);
         MediumData mediumData = new MediumData();
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, userAdministartion);
-        User testUser = new User("Username", "Passwort");
-        testUser.setActivated(true);
+        User testUser = userAdministartion.createUser("Username", "Passwort");
+        String adminToken = userAdministartion.logIn("AdminOne", "Admin");
+        userAdministartion.activateUser("Username", adminToken);
         String token = userAdministartion.logIn("Username", "Passwort");
         MediaDisks discsTest = new MediaDisks();
         discsTest.setAccess(testedAdminstration, testUser);

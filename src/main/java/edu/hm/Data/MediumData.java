@@ -35,6 +35,9 @@ public class MediumData implements MediumDataAccess {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+        /*updateCopyList();
+        updateBookList();
+        updateCopyList();*/
     }
 
     /**
@@ -57,7 +60,7 @@ public class MediumData implements MediumDataAccess {
             }
         }
         if (!exists) {
-            addDisctoDatabase(newDisc);
+            mediaList.add(addDisctoDatabase(newDisc));
             answer = "OK";
         }
         return answer;
@@ -66,7 +69,7 @@ public class MediumData implements MediumDataAccess {
     @Override
     public Copy addCopy(User owner, Medium medium, String location) {
         Copy newCopy = new Copy(owner, medium, location);
-        addCopytoDatabase(newCopy);
+        copies.add(addCopytoDatabase(newCopy));
         return newCopy;
     }
 
@@ -81,7 +84,7 @@ public class MediumData implements MediumDataAccess {
             }
         }
         if (!exists) {
-            addBooktoDatabase(newBook);
+            mediaList.add(addBooktoDatabase(newBook));
             answer = "OK";
         }
         return answer;
@@ -132,7 +135,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-        updateBookList();
+      //  updateBookList();
         return newBook;
     }
 
@@ -184,7 +187,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-        updateCopyList();
+       // updateCopyList();
         return newCopy;
     }
 
@@ -235,7 +238,7 @@ public class MediumData implements MediumDataAccess {
         } finally {
             session.close();
         }
-        updateDiscList();
+        //updateDiscList();
         return newDisc;
     }
 

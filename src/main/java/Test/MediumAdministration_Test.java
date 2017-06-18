@@ -5,6 +5,7 @@ import edu.hm.Data.UserData;
 import edu.hm.Logic.MediumAdministartion;
 import edu.hm.Logic.UserAdministartion;
 import edu.hm.model.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -27,59 +28,66 @@ public class MediumAdministration_Test {
         tester.testSearch();
         tester.testEdit();
     }
-
+    @Test
     public void testAddBook(){
         MediumData mediumData = new MediumData();
         UserData UserData = new UserData();
         UserAdministartion validate = new UserAdministartion(UserData);
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, validate);
-        User testUser = new User("Username", "Passwort");
+        User testUser = validate.createUser("Username", "Passwort");
         String testToken = validate.logIn("Username", "Passwort");
-        testUser.setActivated(true);
+        assertEquals(testedAdminstration.createBook("9783161484100", "testbook",  "me", "just a test", testToken), "not Authorized");
+        String adminToken = validate.logIn("AdminOne", "Admin");
+        validate.activateUser("Username", adminToken);
+        testToken = validate.logIn("Username", "Passwort");
         assertEquals(testedAdminstration.createBook("12", "testbook", "me", "just a test", testToken), "invalid isbn");
         assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "me", "just a test", testToken), "OK");
         assertEquals(testedAdminstration.createBook("9783161484100", "testbook", "me", "just a test", testToken), "exists already");
-        testUser.setActivated(false);
-        assertEquals(testedAdminstration.createBook("9783161484100", "testbook",  "me", "just a test", testToken), "not Authorized");
     }
-
+    @Test
     public void testAddDisc(){
         MediumData mediumData = new MediumData();
         UserData UserData = new UserData();
         UserAdministartion validate = new UserAdministartion(UserData);
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, validate);
-        User testUser = new User("Username", "Passwort");
+        User testUser = validate.createUser("Username", "Passwort");
         String testToken = validate.logIn("Username", "Passwort");
-        testUser.setActivated(true);
+        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testToken), "not Authorized");
+        String adminToken = validate.logIn("AdminOne", "Admin");
+        validate.activateUser("Username", adminToken);
+        testToken = validate.logIn("Username", "Passwort");
         assertEquals(testedAdminstration.createDisc("12", "testDisc", "me", 1, "just a test", testToken), "invalid barcode");
         assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testToken), "OK");
         assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testToken), "exists already");
-        testUser.setActivated(false);
-        assertEquals(testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testToken), "not Authorized");
-    }
 
+    }
+    @Test
     public void testAddCopy(){
         MediumData mediumData = new MediumData();
         UserData UserData = new UserData();
         UserAdministartion validate = new UserAdministartion(UserData);
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, validate);
-        User testUser = new User("Username", "Passwort");
+        User testUser = validate.createUser("Username", "Passwort");
         String testToken = validate.logIn("Username", "Passwort");
-        testUser.setActivated(true);
         Medium original = new Book("9783161484100", "testbook", "me", "just a test");
-        assertEquals(testedAdminstration.createCopy(testToken, original, "here"), "OK");
-        testUser.setActivated(false);
         assertEquals(testedAdminstration.createCopy(testToken, original, "here"), "not Authorized");
+        String adminToken = validate.logIn("AdminOne", "Admin");
+        validate.activateUser("Username", adminToken);
+        System.out.print(testToken+"fuck this");
+        testToken = validate.logIn("Username", "Passwort");
+        assertEquals(testedAdminstration.createCopy(testToken, original, "here"), "OK");
     }
 
+    @Test
     public void testSearch(){
         MediumData mediumData = new MediumData();
         UserData UserData = new UserData();
         UserAdministartion validate = new UserAdministartion(UserData);
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, validate);
-        User testUser = new User("Username", "Passwort");
+        User testUser = validate.createUser("Username", "Passwort");
+        String adminToken = validate.logIn("AdminOne", "Admin");
+        validate.activateUser("Username", adminToken);
         String testToken = validate.logIn("Username", "Passwort");
-        testUser.setActivated(true);
         Book testBook = new Book("9783161484100", "testBook", "me", "just a test");
         Disc testDisc = new Disc("9783161484100", "testDisc",  "me", 1, "just a test");
 
@@ -118,6 +126,7 @@ public class MediumAdministration_Test {
         testCopyList.add(testCopy);
 
         testedAdminstration.createCopy(testToken, testBook, "here");
+        System.out.print(testedAdminstration.findCopyByOwner(testUser) + "\n" + testCopyList);
         assertTrue(testedAdminstration.findCopyByOwner(testUser).equals(testCopyList));
         assertTrue(testedAdminstration.findCopyByLocation("here").equals(testCopyList));
         assertTrue(testedAdminstration.findCopyByMedium(testBook).equals(testCopyList));
@@ -127,30 +136,32 @@ public class MediumAdministration_Test {
         assertTrue(testedAdminstration.findCopyByBorrower(testUser).equals(testCopyList));
     }
 
+    @Test
     public void testEdit(){
         MediumData mediumData = new MediumData();
         UserData UserData = new UserData();
         UserAdministartion validate = new UserAdministartion(UserData);
         MediumAdministartion testedAdminstration = new MediumAdministartion(mediumData, validate);
-        User testUser = new User("Username", "Passwort");
-        String TestToken = validate.logIn("Username", "Passwort");
-        testUser.setActivated(true);
-        testedAdminstration.createBook("9783161484100", "testBook", "me", "just a test", TestToken);
-        testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", TestToken);
+        User testUser = validate.createUser("Username", "Passwort");
+        String adminToken = validate.logIn("AdminOne", "Admin");
+        validate.activateUser("Username", adminToken);
+        String testToken = validate.logIn("Username", "Passwort");
+        testedAdminstration.createBook("9783161484100", "testBook", "me", "just a test", testToken);
+        testedAdminstration.createDisc("9783161484100", "testDisc", "me", 1, "just a test", testToken);
 
-        assertEquals("OK", testedAdminstration.editBook("9783161484100", "nope", "notME", "just a description", TestToken));
-        assertEquals("OK", testedAdminstration.editBook("9783161484100", "testedBook", "notME", null, TestToken));
-        assertEquals("no Titel", testedAdminstration.editBook("9783161484100", null, "notME", "just a description", TestToken));
-        assertEquals("no Author", testedAdminstration.editBook("9783161484100", "what titel", null, "just a description", TestToken));
+        assertEquals("OK", testedAdminstration.editBook("9783161484100", "nope", "notME", "just a description", testToken));
+        assertEquals("OK", testedAdminstration.editBook("9783161484100", "testedBook", "notME", null, testToken));
+        assertEquals("no Titel", testedAdminstration.editBook("9783161484100", "", "notME", "just a description", testToken));
+        assertEquals("no Author", testedAdminstration.editBook("9783161484100", "what titel", null, "just a description", testToken));
 
-        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "nope",  "me", 1, "just a description", TestToken));
-        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 1, null, TestToken));
-        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 0, null, TestToken));
-        assertEquals("no Titel", testedAdminstration.editDisc("9783161484100", null, "me", 1, "just a description", TestToken));
-        assertEquals("no Director", testedAdminstration.editDisc("9783161484100", "shit", null, 1, "just a description", TestToken));
+        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "nope",  "me", 1, "just a description", testToken));
+        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 1, null, testToken));
+        assertEquals("OK", testedAdminstration.editDisc("9783161484100", "testedBook", "me", 0, null, testToken));
+        assertEquals("no Titel", testedAdminstration.editDisc("9783161484100", null, "me", 1, "just a description", testToken));
+        assertEquals("no Director", testedAdminstration.editDisc("9783161484100", "shit", null, 1, "just a description", testToken));
 
-        assertEquals("no Book found", testedAdminstration.editBook("9783161485100", "what", "notME", "just a description", TestToken));
-        assertEquals("no Disc found", testedAdminstration.editDisc("9783161485100", "why", "me", 1, "just a description", TestToken));
+        assertEquals("no Book found", testedAdminstration.editBook("9783161485100", "what", "notME", "just a description", testToken));
+        assertEquals("no Disc found", testedAdminstration.editDisc("9783161485100", "why", "me", 1, "just a description", testToken));
 
     }
 

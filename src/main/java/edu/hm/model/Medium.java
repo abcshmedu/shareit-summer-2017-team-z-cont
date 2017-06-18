@@ -1,6 +1,7 @@
 package edu.hm.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public abstract class Medium {
 
-    private String id;
+    private int id;
     private String titel;
     private String description;
 
@@ -96,7 +97,8 @@ public abstract class Medium {
      * @return the ID
      */
     @Id
-    public String getId() {
+    @GeneratedValue
+    public int getId() {
         return id;
     }
 
@@ -104,7 +106,7 @@ public abstract class Medium {
      * setter for the hibernate id.
      * @param id the id
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

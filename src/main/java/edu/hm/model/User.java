@@ -1,6 +1,7 @@
 package edu.hm.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class User {
 
-
+    private int id;
     private String username;
     private String forename;
     private String surname;
@@ -79,7 +80,6 @@ public class User {
      * getter for the username.
      * @return the username as a String
      */
-    @Id
     public String getUsername() {
         return username;
     }
@@ -187,5 +187,23 @@ public class User {
         result = 31 * result + (isActivated() ? 1 : 0);
         result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
         return result;
+    }
+
+    /**
+     * returns the id for hibernate.
+     * @return th id
+     */
+    @Id
+    @GeneratedValue
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * sets the id for hibernate.
+     * @param id the new id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

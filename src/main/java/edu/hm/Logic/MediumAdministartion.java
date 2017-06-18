@@ -35,7 +35,10 @@ public class MediumAdministartion implements MediaAdminAccess {
     public String createBook(String isbn, String titel, String author, String description, String token) {
         isbn = isbn.replaceAll("-", "");
         String result = "something went wrong";
+
+        System.out.print("\n\n" + token);
         User curUser = userValidation.getUserForToken(token);
+        System.out.print("\n\n" + curUser);
         if (checkValidISBN(isbn)) {
             if (curUser != null && checkUserOK(curUser)) {
             result = mdata.addBook(isbn, titel, author, description);
@@ -158,7 +161,7 @@ public class MediumAdministartion implements MediaAdminAccess {
         ArrayList<Copy> results = new ArrayList<>();
         if (mdata.getCopyList().size() > 0) {
             for (Copy c: mdata.getCopyList()) {
-                if (c.getOwner() != null && c.getOwner() == owner) {
+                if (c.getOwner() != null && c.getOwner().getUsername().equals(owner.getUsername())) {
                     results.add(c);
                 }
             }
@@ -226,14 +229,15 @@ public class MediumAdministartion implements MediaAdminAccess {
     @Override
     public String editBook(String isbn, String titel, String author, String description, String token) {
         isbn = isbn.replaceAll("-", "");
+        System.out.print("\n" + titel);
         User curUser = userValidation.getUserForToken(token);
         if (checkUserOK(curUser)) {
             Book toBeEdited = findMediumByISBN(isbn);
             if (toBeEdited != null) {
-                if (titel == null) {
+                if (titel == null || titel.length() == 0) {
                     return "no Titel";
                 } else
-                if (author == null) {
+                if (author == null || author.length() == 0) {
                     return "no Author";
                 } else {
                     toBeEdited.setTitel(titel);
@@ -245,6 +249,8 @@ public class MediumAdministartion implements MediaAdminAccess {
             } else {
                 return "no Book found";
             }
+        } else {
+            return "invalid User";
         }
         mdata.saveChanges();
         return "OK";
@@ -303,7 +309,11 @@ public class MediumAdministartion implements MediaAdminAccess {
      * @return true if the user is activated otherwise false
      */
     private boolean checkUserOK(User user) {
-        return user.isActivated();
+        if (user != null) {
+            return user.isActivated();
+        } else {
+            return false;
+        }
     }
 
 

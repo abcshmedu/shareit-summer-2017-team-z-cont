@@ -30,16 +30,9 @@ public class UserData implements UserDataAccess {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+        //updateUserList();
     }
 
-    /**
-     * ctor for a UserData with existing users.
-     * @param oldUsers an array list of persistent users
-     */
-    public UserData(ArrayList<User> oldUsers) {
-
-        userList = oldUsers;
-    }
 
     @Override
     public User addUser(String username, String password) {
@@ -71,6 +64,7 @@ public class UserData implements UserDataAccess {
             session.close();
         }
         updateUserList();
+        //userList.add(newUser);
         return newUser;
     }
 

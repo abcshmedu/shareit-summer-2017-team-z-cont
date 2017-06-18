@@ -1,7 +1,6 @@
 package edu.hm.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  * Created by Markus on 21.04.2017.
@@ -36,7 +35,6 @@ public class Book extends Medium {
      * getter for the books isbn.
      * @return the books isbn
      */
-    @Id
     public String getIsbn() {
         return isbn;
     }

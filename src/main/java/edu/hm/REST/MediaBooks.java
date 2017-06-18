@@ -109,6 +109,7 @@ public class MediaBooks {
         }
 
 
+        System.out.print(mAdm);
         String result = mAdm.createBook(isbn, titel, "me", description, token);
 
         return Response
