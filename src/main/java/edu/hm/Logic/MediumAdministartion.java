@@ -1,5 +1,6 @@
 package edu.hm.Logic;
 
+import com.google.inject.Inject;
 import edu.hm.REST.MediaAdminAccess;
 import edu.hm.model.*;
 
@@ -14,8 +15,10 @@ public class MediumAdministartion implements MediaAdminAccess {
     /**
      * Data-Layer access.
      */
+    @Inject
     private MediumDataAccess mdata;
 
+    @Inject
     private UserAdministartion userValidation;
 
     /**

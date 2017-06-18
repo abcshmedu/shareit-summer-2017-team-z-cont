@@ -1,5 +1,6 @@
 package edu.hm.REST;
 
+import com.google.inject.Inject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ public class UserAPI {
     /**
      * create ctor to get the logic
      */
+    @Inject
     private static UserAdminAccess uAdm;
     private static final int STATUS200 = 200;
     private static final int STATUS400 = 400;

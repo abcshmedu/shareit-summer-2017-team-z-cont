@@ -16,6 +16,7 @@ public class Login {
     /**
      * create ctor to get the logic
      */
+    @com.google.inject.Inject
     private static UserAdminAccess uAdm;
     private static final int STATUS200 = 200;
     private static final int STATUS400 = 400;

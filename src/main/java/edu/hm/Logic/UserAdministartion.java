@@ -1,5 +1,6 @@
 package edu.hm.Logic;
 
+import com.google.inject.Inject;
 import edu.hm.REST.UserAdminAccess;
 import edu.hm.model.User;
 
@@ -24,6 +25,7 @@ public class UserAdministartion implements UserAdminAccess {
      * ctor for a new Useradministration.
      * @param dataAccess the acces to the (persistent) Userdata
      */
+    @Inject
     public UserAdministartion(UserDataAccess dataAccess) {
         userDataAccess = dataAccess;
         createAdmin("AdminOne", "Admin");

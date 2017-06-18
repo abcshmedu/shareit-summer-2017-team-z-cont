@@ -2,6 +2,8 @@ package edu.hm.REST;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+
+import com.google.inject.Inject;
 import edu.hm.model.Book;
 import edu.hm.model.User;
 
@@ -23,6 +25,7 @@ public class MediaBooks {
     /**
      * create ctor to get the logic
      */
+    @Inject
     private static MediaAdminAccess mAdm;
     private static User dummy;
     private static final int STATUS200 = 200;
